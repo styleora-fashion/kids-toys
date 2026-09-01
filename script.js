@@ -1,7 +1,8 @@
 ```javascript
 /* =========================================================
-   KIDDOPLAY - MAIN JAVASCRIPT
-   FIXED VERSION
+   KIDDOPLAY
+   MAIN JAVASCRIPT
+   Version: 2026
 ========================================================= */
 
 "use strict";
@@ -13,15 +14,12 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =====================================================
+    /* -----------------------------------------------------
        ELEMENTS
-    ===================================================== */
+    ----------------------------------------------------- */
 
-    const menuBtn =
-        document.getElementById("menuBtn");
-
-    const navLinks =
-        document.getElementById("navLinks");
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
 
     const filterButtons =
         document.querySelectorAll(".filter-btn");
@@ -29,72 +27,90 @@ document.addEventListener("DOMContentLoaded", () => {
     const toyCards =
         document.querySelectorAll(".toy-card");
 
-    const categoryCards =
-        document.querySelectorAll(".category-card");
-
     const noResults =
         document.getElementById("noResults");
 
-    const storeCards =
-        document.querySelectorAll(".store-card");
+    const categoryCards =
+        document.querySelectorAll(".category-card");
 
-    const productButtons =
-        document.querySelectorAll(".toy-card .toy-btn");
+    const toysNavLink =
+        document.querySelector(
+            '.nav-links a[href="#toys"]'
+        );
 
+    const copyright =
+        document.querySelector(".copyright");
 
 
     /* =====================================================
        MOBILE MENU
     ===================================================== */
 
-    function closeMenu() {
+    function closeMobileMenu() {
 
-        if (!navLinks || !menuBtn) return;
+        if (!navLinks) return;
 
         navLinks.classList.remove("active");
 
-        menuBtn.textContent = "☰";
+        if (menuBtn) {
 
-        menuBtn.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-        menuBtn.setAttribute(
-            "aria-label",
-            "Open menu"
-        );
-    }
-
-
-    if (menuBtn && navLinks) {
-
-        menuBtn.addEventListener("click", () => {
-
-            const opened =
-                navLinks.classList.toggle("active");
-
-            menuBtn.textContent =
-                opened ? "✕" : "☰";
+            menuBtn.textContent = "☰";
 
             menuBtn.setAttribute(
                 "aria-expanded",
-                opened ? "true" : "false"
+                "false"
             );
 
             menuBtn.setAttribute(
                 "aria-label",
-                opened
-                    ? "Close menu"
-                    : "Open menu"
+                "Open menu"
             );
 
-        });
+        }
 
     }
 
 
-    /* Close mobile menu after navigation */
+    function toggleMobileMenu() {
+
+        if (!navLinks) return;
+
+        const isOpen =
+            navLinks.classList.toggle("active");
+
+        if (menuBtn) {
+
+            menuBtn.textContent =
+                isOpen ? "✕" : "☰";
+
+            menuBtn.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+            menuBtn.setAttribute(
+                "aria-label",
+                isOpen
+                    ? "Close menu"
+                    : "Open menu"
+            );
+
+        }
+
+    }
+
+
+    if (menuBtn) {
+
+        menuBtn.addEventListener(
+            "click",
+            toggleMobileMenu
+        );
+
+    }
+
+
+    /* Close menu when navigation link is clicked */
 
     document
         .querySelectorAll(".nav-links a")
@@ -102,67 +118,99 @@ document.addEventListener("DOMContentLoaded", () => {
 
             link.addEventListener(
                 "click",
-                closeMenu
+                closeMobileMenu
             );
 
         });
 
 
+    /* Close menu with Escape */
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (
+                event.key === "Escape" &&
+                navLinks &&
+                navLinks.classList.contains("active")
+            ) {
+
+                closeMobileMenu();
+
+            }
+
+        }
+    );
+
 
     /* =====================================================
-       TOY FILTER
+       TOY FILTER SYSTEM
     ===================================================== */
 
-    function filterToys(category) {
+    function showToy(card) {
 
-        let visibleCount = 0;
+        card.style.display = "";
 
+        /*
+         * Force browser to notice the animation
+         */
+
+        card.classList.remove("filter-show");
+
+        void card.offsetWidth;
+
+        card.classList.add("filter-show");
+
+    }
+
+
+    function hideToy(card) {
+
+        card.classList.remove("filter-show");
+
+        card.style.display = "none";
+
+    }
+
+
+    function filterToys(selectedFilter = "all") {
+
+        let visibleToys = 0;
 
         toyCards.forEach((card) => {
 
-            const cardCategory =
-                card.dataset.category;
+            const category =
+                card.dataset.category || "";
+
+            const shouldShow =
+                selectedFilter === "all" ||
+                category === selectedFilter;
 
 
-            const show =
-                category === "all" ||
-                cardCategory === category;
+            if (shouldShow) {
 
+                showToy(card);
 
-            if (show) {
-
-                card.style.display = "";
-
-                visibleCount++;
-
-
-                /* Re-trigger animation */
-
-                card.classList.remove(
-                    "filter-show"
-                );
-
-                void card.offsetWidth;
-
-                card.classList.add(
-                    "filter-show"
-                );
+                visibleToys++;
 
             } else {
 
-                card.style.display = "none";
+                hideToy(card);
 
             }
 
         });
 
 
-        /* No result message */
+        /* ---------------------------------------------
+           NO RESULTS MESSAGE
+        --------------------------------------------- */
 
         if (noResults) {
 
             noResults.style.display =
-                visibleCount === 0
+                visibleToys === 0
                     ? "block"
                     : "none";
 
@@ -171,9 +219,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-
     /* =====================================================
-       FILTER BUTTON CLICK
+       FILTER BUTTONS
     ===================================================== */
 
     filterButtons.forEach((button) => {
@@ -182,57 +229,35 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             () => {
 
-                const selected =
-                    button.dataset.filter;
-
-                if (!selected) return;
+                const selectedFilter =
+                    button.dataset.filter || "all";
 
 
                 /* Active button */
 
-                filterButtons.forEach(
-                    (btn) => {
+                filterButtons.forEach((btn) => {
 
-                        btn.classList.remove(
-                            "active"
-                        );
+                    btn.classList.remove("active");
 
-                    }
-                );
-
-
-                button.classList.add(
-                    "active"
-                );
-
-
-                /* Filter toys */
-
-                filterToys(selected);
-
-
-                /*
-                   Update URL hash without
-                   creating unnecessary page jump.
-                */
-
-                if (
-                    window.history &&
-                    window.history.replaceState
-                ) {
-
-                    const hash =
-                        selected === "all"
-                            ? "#toys"
-                            : "#toys-" + selected;
-
-                    window.history.replaceState(
-                        null,
-                        "",
-                        hash
+                    btn.setAttribute(
+                        "aria-pressed",
+                        "false"
                     );
 
-                }
+                });
+
+
+                button.classList.add("active");
+
+                button.setAttribute(
+                    "aria-pressed",
+                    "true"
+                );
+
+
+                /* Filter products */
+
+                filterToys(selectedFilter);
 
             }
         );
@@ -240,9 +265,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-
     /* =====================================================
-       CATEGORY CARD CLICK
+       CATEGORY CARDS
     ===================================================== */
 
     categoryCards.forEach((categoryCard) => {
@@ -251,48 +275,56 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             (event) => {
 
-                const category =
+                /*
+                 * Prevent accidental double navigation
+                 * from nested elements.
+                 */
+
+                const selectedCategory =
                     categoryCard.dataset.categoryLink;
 
-                if (!category) return;
+
+                if (!selectedCategory) {
+                    return;
+                }
 
 
                 const matchingButton =
                     document.querySelector(
-                        `.filter-btn[data-filter="${category}"]`
+                        `.filter-btn[data-filter="${selectedCategory}"]`
                     );
 
 
-                if (matchingButton) {
-
-                    /*
-                       Prevent default anchor
-                       jump so filter happens first.
-                    */
-
-                    event.preventDefault();
-
-                    matchingButton.click();
+                if (!matchingButton) {
+                    return;
+                }
 
 
-                    const toysSection =
-                        document.getElementById(
-                            "toys"
-                        );
+                /*
+                 * Activate category filter
+                 */
+
+                matchingButton.click();
 
 
-                    if (toysSection) {
+                /*
+                 * Scroll to toys section
+                 */
 
-                        setTimeout(() => {
+                const toysSection =
+                    document.getElementById("toys");
 
-                            toysSection.scrollIntoView({
-                                behavior: "smooth",
-                                block: "start"
-                            });
 
-                        }, 50);
+                if (toysSection) {
 
-                    }
+                    setTimeout(() => {
+
+                        toysSection.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }, 50);
 
                 }
 
@@ -302,21 +334,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-
     /* =====================================================
-       TOYS NAV LINK
-       Always reset to ALL
+       TOYS NAVIGATION
+       Reset filter to ALL
     ===================================================== */
 
-    const toysNav =
-        document.querySelector(
-            '.nav-links a[href="#toys"]'
-        );
+    if (toysNavLink) {
 
-
-    if (toysNav) {
-
-        toysNav.addEventListener(
+        toysNavLink.addEventListener(
             "click",
             () => {
 
@@ -338,399 +363,139 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-
     /* =====================================================
-       AFFILIATE STORE INFORMATION
+       AFFILIATE LINKS
     ===================================================== */
 
-    const affiliateStores = {
-
-        "justforkids.pk": {
-            name: "JustForKids.pk",
-            commission: "Up to 20%",
-            cookie: "Application details",
-            market: "Pakistan"
-        },
-
-        "montessorigeneration.com": {
-            name: "Montessori Generation",
-            commission: "25%",
-            cookie: "30 days",
-            market: "International"
-        },
-
-        "tobouy.com": {
-            name: "Tobouy",
-            commission: "Up to 15%",
-            cookie: "Program details",
-            market: "International"
-        },
-
-        "tumama-kids.com": {
-            name: "Tumama Kids",
-            commission: "10–15%",
-            cookie: "30 days",
-            market: "International"
-        },
-
-        "thebestkidstoys.com": {
-            name: "Best Kids Toys",
-            commission: "10%",
-            cookie: "Program details",
-            market: "International"
-        },
-
-        "sainsmartjr.com": {
-            name: "SainSmart Jr.",
-            commission: "6%",
-            cookie: "Program details",
-            market: "International"
-        },
-
-        "schoolcrafts.com.pk": {
-            name: "School Crafts Pakistan",
-            commission: "5%",
-            cookie: "Program details",
-            market: "Pakistan"
-        },
-
-        "goto.com.pk": {
-            name: "Goto Pakistan",
-            commission: "2% Baby/Toys & Kids",
-            cookie: "Affiliate tracking",
-            market: "Pakistan"
-        }
-
-    };
+    const externalLinks =
+        document.querySelectorAll(
+            'a[href^="http://"], a[href^="https://"]'
+        );
 
 
+    externalLinks.forEach((link) => {
 
-    /* =====================================================
-       FIND STORE
-    ===================================================== */
+        /*
+         * Do not modify internal GitHub Pages links.
+         */
 
-    function getStore(url) {
+        const href =
+            link.getAttribute("href");
 
-        if (!url) return null;
+
+        if (!href) return;
+
 
         try {
 
-            const hostname =
-                new URL(url)
-                    .hostname
-                    .replace(/^www\./, "")
-                    .toLowerCase();
+            const url =
+                new URL(href);
+
+            const currentHost =
+                window.location.hostname;
 
 
-            const domain =
-                Object.keys(affiliateStores)
-                    .find((item) =>
-                        hostname === item ||
-                        hostname.endsWith("." + item)
-                    );
+            /*
+             * External website
+             */
 
+            if (
+                url.hostname !== currentHost
+            ) {
 
-            return domain
-                ? affiliateStores[domain]
-                : null;
+                link.setAttribute(
+                    "target",
+                    "_blank"
+                );
+
+                link.setAttribute(
+                    "rel",
+                    "nofollow sponsored noopener"
+                );
+
+            }
 
         } catch (error) {
 
-            return null;
-
-        }
-
-    }
-
-
-
-    /* =====================================================
-       ADD STORE META
-    ===================================================== */
-
-    storeCards.forEach((card) => {
-
-        const url =
-            card.getAttribute("href");
-
-        const store =
-            getStore(url);
-
-
-        if (!store) return;
-
-
-        /* Store data */
-
-        card.dataset.store =
-            store.name;
-
-        card.dataset.commission =
-            store.commission;
-
-        card.dataset.cookie =
-            store.cookie;
-
-        card.dataset.market =
-            store.market;
-
-
-        /*
-           Don't duplicate metadata
-           if HTML already contains it.
-        */
-
-        if (
-            card.querySelector(
-                ".affiliate-meta"
-            )
-        ) {
-            return;
-        }
-
-
-        const storeInfo =
-            card.querySelector(
-                ".store-info"
+            console.warn(
+                "Invalid external URL:",
+                href
             );
-
-
-        if (!storeInfo) return;
-
-
-        const meta =
-            document.createElement("div");
-
-        meta.className =
-            "affiliate-meta";
-
-
-        meta.innerHTML = `
-            <span class="commission-badge">
-                ${store.commission}
-            </span>
-
-            <span class="tracking-badge">
-                ${store.cookie}
-            </span>
-        `;
-
-
-        const storeLink =
-            storeInfo.querySelector(
-                ".store-link"
-            );
-
-
-        if (storeLink) {
-
-            storeInfo.insertBefore(
-                meta,
-                storeLink
-            );
-
-        } else {
-
-            storeInfo.appendChild(meta);
 
         }
 
     });
-
-
-
-    /* =====================================================
-       EXTERNAL LINKS
-    ===================================================== */
-
-    document
-        .querySelectorAll(
-            'a[href^="http://"], a[href^="https://"]'
-        )
-        .forEach((link) => {
-
-            link.setAttribute(
-                "target",
-                "_blank"
-            );
-
-            link.setAttribute(
-                "rel",
-                "nofollow sponsored noopener noreferrer"
-            );
-
-        });
-
-
-
-    /* =====================================================
-       STORE CLICK TRACKING
-    ===================================================== */
-
-    storeCards.forEach((card) => {
-
-        card.addEventListener(
-            "click",
-            () => {
-
-                const storeName =
-                    card.dataset.store ||
-                    "Unknown Store";
-
-
-                const commission =
-                    card.dataset.commission ||
-                    "Unknown";
-
-
-                console.log(
-                    "KiddoPlay Affiliate Store:",
-                    storeName
-                );
-
-                console.log(
-                    "Commission:",
-                    commission
-                );
-
-
-                /*
-                   Google Analytics 4
-                   works automatically if
-                   gtag is installed.
-                */
-
-                if (
-                    typeof window.gtag ===
-                    "function"
-                ) {
-
-                    window.gtag(
-                        "event",
-                        "affiliate_store_click",
-                        {
-                            store_name:
-                                storeName,
-
-                            commission:
-                                commission
-                        }
-                    );
-
-                }
-
-            }
-        );
-
-    });
-
 
 
     /* =====================================================
        PRODUCT CLICK TRACKING
     ===================================================== */
 
+    const productButtons =
+        document.querySelectorAll(
+            ".toy-card .toy-btn"
+        );
+
+
     productButtons.forEach((button) => {
 
         button.addEventListener(
             "click",
-            (event) => {
-
-                const url =
-                    button.getAttribute(
-                        "href"
-                    );
-
-
-                /*
-                   Prevent empty links.
-                */
-
-                if (
-                    !url ||
-                    url === "#"
-                ) {
-
-                    event.preventDefault();
-
-                    const card =
-                        button.closest(
-                            ".toy-card"
-                        );
-
-
-                    const name =
-                        card?.querySelector(
-                            "h3"
-                        )?.textContent.trim()
-                        || "Unknown Product";
-
-
-                    console.warn(
-                        "KiddoPlay: Add affiliate URL for:",
-                        name
-                    );
-
-                    return;
-
-                }
-
+            () => {
 
                 const card =
-                    button.closest(
-                        ".toy-card"
-                    );
+                    button.closest(".toy-card");
 
 
                 if (!card) return;
 
 
                 const productName =
-                    card.querySelector(
-                        "h3"
-                    )?.textContent.trim()
-                    || "Unknown Product";
+                    card.querySelector("h3");
 
 
                 const category =
-                    card.querySelector(
-                        ".product-category"
-                    )?.textContent.trim()
-                    || "Unknown";
+                    card.dataset.category || "";
 
 
-                console.log(
-                    "Affiliate Product:",
+                const product =
                     productName
-                );
+                        ? productName.textContent.trim()
+                        : "Unknown product";
+
+
+                /*
+                 * Console tracking
+                 */
 
                 console.log(
-                    "Category:",
-                    category
+                    "KiddoPlay affiliate click:",
+                    {
+                        product: product,
+                        category: category,
+                        url: button.href
+                    }
                 );
 
 
                 /*
-                   Google Analytics 4
-                */
+                 * Google Analytics support
+                 *
+                 * If GA4 is installed, this event
+                 * will automatically be sent.
+                 */
 
                 if (
-                    typeof window.gtag ===
-                    "function"
+                    typeof window.gtag === "function"
                 ) {
 
                     window.gtag(
                         "event",
-                        "affiliate_product_click",
+                        "affiliate_click",
                         {
-                            product_name:
-                                productName,
-
-                            category:
-                                category,
-
-                            destination:
-                                url
+                            product_name: product,
+                            product_category: category,
+                            destination: button.href
                         }
                     );
 
@@ -741,6 +506,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+
+    /* =====================================================
+       STORE CLICK TRACKING
+    ===================================================== */
+
+    const storeLinks =
+        document.querySelectorAll(
+            ".store-card"
+        );
+
+
+    storeLinks.forEach((store) => {
+
+        store.addEventListener(
+            "click",
+            () => {
+
+                const storeName =
+                    store.querySelector("h3");
+
+
+                const name =
+                    storeName
+                        ? storeName.textContent.trim()
+                        : "Unknown store";
+
+
+                console.log(
+                    "KiddoPlay store click:",
+                    name
+                );
+
+
+                if (
+                    typeof window.gtag === "function"
+                ) {
+
+                    window.gtag(
+                        "event",
+                        "store_click",
+                        {
+                            store_name: name,
+                            destination: store.href
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+    });
 
 
     /* =====================================================
@@ -752,111 +569,157 @@ document.addEventListener("DOMContentLoaded", () => {
             ".toy-card, " +
             ".category-card, " +
             ".why-card, " +
+            ".store-card, " +
             ".affiliate-notice, " +
-            ".store-card"
+            ".deals-section, " +
+            ".about"
         );
 
 
     if (
-        "IntersectionObserver" in window
+        "IntersectionObserver" in window &&
+        revealElements.length
     ) {
 
         const observer =
             new IntersectionObserver(
-                (entries, observerObject) => {
+                (entries, observerInstance) => {
 
-                    entries.forEach(
-                        (entry) => {
+                    entries.forEach((entry) => {
 
-                            if (
-                                entry.isIntersecting
-                            ) {
+                        if (
+                            entry.isIntersecting
+                        ) {
 
-                                entry.target.classList.add(
-                                    "revealed"
-                                );
+                            entry.target.classList.add(
+                                "revealed"
+                            );
 
 
-                                observerObject.unobserve(
-                                    entry.target
-                                );
-
-                            }
+                            observerInstance.unobserve(
+                                entry.target
+                            );
 
                         }
-                    );
+
+                    });
 
                 },
                 {
-                    threshold: 0.08
+                    threshold: 0.08,
+                    rootMargin: "0px 0px -30px 0px"
                 }
             );
 
 
-        revealElements.forEach(
-            (element) => {
+        revealElements.forEach((element) => {
 
-                element.classList.add(
-                    "reveal-element"
-                );
+            element.classList.add(
+                "reveal-element"
+            );
 
-                observer.observe(
-                    element
-                );
+            observer.observe(element);
 
-            }
-        );
+        });
 
     } else {
 
         /*
-           Fallback for older browsers.
-        */
+         * Fallback for old browsers
+         */
 
-        revealElements.forEach(
-            (element) => {
+        revealElements.forEach((element) => {
 
-                element.classList.add(
-                    "revealed"
-                );
+            element.classList.add(
+                "revealed"
+            );
 
-            }
-        );
+        });
 
     }
 
 
-
     /* =====================================================
-       ESC KEY
+       SMOOTH SCROLL FOR INTERNAL LINKS
     ===================================================== */
 
-    document.addEventListener(
-        "keydown",
-        (event) => {
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach((link) => {
 
-            if (
-                event.key === "Escape"
-            ) {
+            link.addEventListener(
+                "click",
+                (event) => {
 
-                closeMenu();
+                    const targetId =
+                        link.getAttribute("href");
 
-            }
 
-        }
-    );
+                    if (
+                        !targetId ||
+                        targetId === "#"
+                    ) {
+                        return;
+                    }
 
+
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+
+
+                    if (!target) {
+                        return;
+                    }
+
+
+                    event.preventDefault();
+
+
+                    const navbar =
+                        document.querySelector(
+                            ".navbar"
+                        );
+
+
+                    const navbarHeight =
+                        navbar
+                            ? navbar.offsetHeight
+                            : 0;
+
+
+                    const targetPosition =
+                        target.getBoundingClientRect().top +
+                        window.scrollY -
+                        navbarHeight;
+
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: "smooth"
+                    });
+
+
+                    /*
+                     * Update browser URL
+                     */
+
+                    history.replaceState(
+                        null,
+                        "",
+                        targetId
+                    );
+
+                }
+            );
+
+        });
 
 
     /* =====================================================
        CURRENT YEAR
     ===================================================== */
-
-    const copyright =
-        document.querySelector(
-            ".copyright"
-        );
-
 
     if (copyright) {
 
@@ -866,40 +729,81 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-
     /* =====================================================
-       INITIAL FILTER
+       INITIALIZE FILTERS
     ===================================================== */
 
-    filterToys("all");
+    filterButtons.forEach((button) => {
+
+        button.setAttribute(
+            "aria-pressed",
+            button.classList.contains("active")
+                ? "true"
+                : "false"
+        );
+
+    });
 
 
-    filterButtons.forEach(
-        (button) => {
+    /*
+     * IMPORTANT:
+     * Initial state must NEVER show
+     * "No toys found".
+     */
 
-            button.classList.toggle(
-                "active",
-                button.dataset.filter === "all"
-            );
+    if (toyCards.length) {
+
+        filterToys("all");
+
+    } else if (noResults) {
+
+        noResults.style.display = "none";
+
+    }
+
+
+    /* =====================================================
+       RESIZE HANDLING
+    ===================================================== */
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            /*
+             * Close mobile menu when switching
+             * to desktop width.
+             */
+
+            if (
+                window.innerWidth > 700 &&
+                navLinks &&
+                navLinks.classList.contains("active")
+            ) {
+
+                closeMobileMenu();
+
+            }
 
         }
     );
 
 
     /* =====================================================
-       CONSOLE STATUS
+       PAGE LOAD COMPLETE
     ===================================================== */
 
     console.log(
-        "KiddoPlay JS initialized successfully."
+        "KiddoPlay initialized successfully."
     );
 
     console.log(
-        `Affiliate stores detected: ${storeCards.length}`
+        `Products loaded: ${toyCards.length}`
+    );
+
+    console.log(
+        `Stores loaded: ${storeLinks.length}`
     );
 
 });
 ```
-   
-   
-  
