@@ -1,34 +1,6 @@
 ```css
 /* =========================================================
-   KIDDOPLAY - MAIN STYLESHEET
-   Responsive Kids Toys Affiliate Website
-========================================================= */
-
-:root {
-    --primary: #ff6b6b;
-    --primary-dark: #ef5350;
-    --yellow: #ffd166;
-    --blue: #4dabf7;
-    --purple: #9b5de5;
-    --green: #51cf66;
-    --pink: #f783ac;
-
-    --dark: #172033;
-    --text: #4b5563;
-    --muted: #7b8494;
-    --white: #ffffff;
-    --light: #f8faff;
-    --border: #e9edf5;
-
-    --shadow: 0 12px 35px rgba(23, 32, 51, 0.08);
-    --shadow-hover: 0 20px 45px rgba(23, 32, 51, 0.14);
-
-    --radius: 22px;
-    --container: 1180px;
-}
-
-/* =========================================================
-   RESET
+   KIDDOPLAY - COMPLETE STYLE.CSS
 ========================================================= */
 
 * {
@@ -37,16 +9,45 @@
     box-sizing: border-box;
 }
 
+:root {
+    --primary: #ff6b35;
+    --primary-dark: #e95725;
+    --yellow: #ffd166;
+    --blue: #4dabf7;
+    --purple: #9b5de5;
+    --green: #4ecb71;
+    --pink: #ff70a6;
+
+    --dark: #18202b;
+    --text: #4d5866;
+    --muted: #7c8795;
+    --white: #ffffff;
+    --light: #f8fafc;
+    --border: #e8edf3;
+
+    --shadow: 0 15px 40px rgba(24, 32, 43, 0.08);
+    --shadow-hover: 0 22px 50px rgba(24, 32, 43, 0.14);
+
+    --radius: 22px;
+    --container: 1180px;
+}
+
 html {
     scroll-behavior: smooth;
 }
 
 body {
     font-family: "Poppins", sans-serif;
-    color: var(--dark);
-    background: var(--white);
-    line-height: 1.6;
+    color: var(--text);
+    background: #ffffff;
+    line-height: 1.7;
     overflow-x: hidden;
+}
+
+body,
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
 }
 
 img {
@@ -60,29 +61,14 @@ a {
 }
 
 button {
-    font: inherit;
+    font-family: inherit;
 }
 
-section {
-    scroll-margin-top: 90px;
+::selection {
+    background: var(--primary);
+    color: white;
 }
 
-/* =========================================================
-   CONTAINER
-========================================================= */
-
-.nav-container,
-.hero,
-.toys-section,
-.categories,
-.stores-section,
-.affiliate-table-section,
-.why-section,
-.about {
-    width: min(1180px, calc(100% - 40px));
-    margin-left: auto;
-    margin-right: auto;
-}
 
 /* =========================================================
    NAVBAR
@@ -91,15 +77,19 @@ section {
 .navbar {
     position: sticky;
     top: 0;
-    z-index: 9999;
+    z-index: 1000;
     width: 100%;
     background: rgba(255, 255, 255, 0.96);
-    border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(232, 237, 243, 0.9);
 }
 
 .nav-container {
-    min-height: 76px;
+    width: min(1180px, calc(100% - 40px));
+    min-height: 78px;
+    margin: auto;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -110,6 +100,7 @@ section {
     font-family: "Baloo 2", cursive;
     font-size: 32px;
     font-weight: 800;
+    line-height: 1;
     color: var(--dark);
     white-space: nowrap;
 }
@@ -121,47 +112,145 @@ section {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .nav-links a {
+    position: relative;
     padding: 10px 13px;
-    color: var(--text);
+    color: #46515e;
     font-size: 14px;
     font-weight: 600;
-    border-radius: 10px;
     transition: 0.25s ease;
 }
 
 .nav-links a:hover {
     color: var(--primary);
-    background: #fff3f3;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 13px;
+    right: 13px;
+    bottom: 3px;
+    height: 2px;
+    border-radius: 20px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: 0.25s ease;
+}
+
+.nav-links a:hover::after {
+    transform: scaleX(1);
 }
 
 .menu-btn {
     display: none;
+    border: 0;
+    background: var(--primary);
+    color: white;
     width: 44px;
     height: 44px;
-    border: 0;
     border-radius: 12px;
-    background: var(--dark);
-    color: var(--white);
+    font-size: 24px;
     cursor: pointer;
-    font-size: 22px;
 }
+
+
+/* =========================================================
+   COMMON
+========================================================= */
+
+main {
+    width: 100%;
+}
+
+section {
+    width: 100%;
+}
+
+.hero,
+.toys-section,
+.categories,
+.stores-section,
+.affiliate-table-section,
+.why-section,
+.about {
+    width: min(var(--container), calc(100% - 40px));
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-label {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.section-heading > div {
+    max-width: 650px;
+}
+
+.section-heading > p {
+    max-width: 420px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.section-heading.centered {
+    display: block;
+    text-align: center;
+}
+
+.section-heading.centered > div,
+.section-heading.centered > p {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--dark);
+}
+
+h2 {
+    font-family: "Baloo 2", cursive;
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1.05;
+    font-weight: 800;
+}
+
+h2 span {
+    color: var(--primary);
+}
+
 
 /* =========================================================
    HERO
 ========================================================= */
 
 .hero {
-    min-height: 650px;
+    min-height: 680px;
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;
     align-items: center;
-    gap: 60px;
-    padding-top: 60px;
-    padding-bottom: 60px;
+    gap: 50px;
+    padding-top: 70px;
+    padding-bottom: 70px;
 }
 
 .hero-content {
@@ -169,64 +258,63 @@ section {
     z-index: 2;
 }
 
-.hero-label,
-.section-label {
-    display: inline-block;
+.hero-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 15px;
+    border-radius: 50px;
+    background: #fff1eb;
     color: var(--primary);
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
-    letter-spacing: 1.5px;
-    margin-bottom: 14px;
+    letter-spacing: 1.2px;
 }
 
 .hero h1 {
+    margin-top: 18px;
     font-family: "Baloo 2", cursive;
-    font-size: clamp(52px, 6vw, 82px);
-    line-height: 0.98;
+    font-size: clamp(55px, 7vw, 84px);
+    line-height: 0.95;
     letter-spacing: -2px;
-    margin-bottom: 25px;
+    font-weight: 800;
 }
 
-.hero h1 span,
-.section-heading h2 span,
-.category-heading h2 span,
-.deal-content h2 span,
-.about h2 span {
+.hero h1 span {
+    display: block;
     color: var(--primary);
 }
 
 .hero-content > p {
     max-width: 620px;
+    margin-top: 25px;
     color: var(--text);
-    font-size: 17px;
-    line-height: 1.8;
-    margin-bottom: 30px;
+    font-size: 16px;
 }
 
 .hero-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 14px;
+    gap: 13px;
+    margin-top: 30px;
 }
 
 .main-btn,
-.secondary-btn,
-.store-btn,
-.toy-btn {
+.secondary-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 13px;
+    min-height: 52px;
+    padding: 0 23px;
+    border-radius: 14px;
+    font-size: 14px;
     font-weight: 700;
     transition: 0.25s ease;
-    cursor: pointer;
 }
 
 .main-btn {
-    padding: 14px 22px;
     background: var(--primary);
     color: white;
-    box-shadow: 0 10px 25px rgba(255, 107, 107, 0.25);
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.24);
 }
 
 .main-btn:hover {
@@ -235,9 +323,9 @@ section {
 }
 
 .secondary-btn {
-    padding: 13px 21px;
-    border: 1px solid var(--border);
     background: white;
+    color: var(--dark);
+    border: 1px solid var(--border);
 }
 
 .secondary-btn:hover {
@@ -247,7 +335,8 @@ section {
 
 .hero-trust {
     display: flex;
-    gap: 45px;
+    flex-wrap: wrap;
+    gap: 35px;
     margin-top: 42px;
 }
 
@@ -257,215 +346,218 @@ section {
 }
 
 .hero-trust strong {
+    color: var(--dark);
     font-family: "Baloo 2", cursive;
-    font-size: 30px;
+    font-size: 31px;
     line-height: 1;
 }
 
 .hero-trust span {
+    margin-top: 4px;
     color: var(--muted);
     font-size: 12px;
-    margin-top: 4px;
+    font-weight: 600;
 }
+
+
+/* =========================================================
+   HERO GRAPHIC
+========================================================= */
 
 .hero-image {
     position: relative;
-    min-height: 500px;
-    border-radius: 40px;
+    min-height: 480px;
+    border-radius: 45px;
     background:
-        radial-gradient(circle at 30% 25%, #fff5c4 0 10%, transparent 11%),
-        radial-gradient(circle at 75% 30%, #d9f3ff 0 13%, transparent 14%),
-        linear-gradient(145deg, #fff5f5, #f1f7ff);
+        radial-gradient(circle at 25% 25%, #fff4bb 0 9%, transparent 10%),
+        radial-gradient(circle at 80% 20%, #d9f4ff 0 10%, transparent 11%),
+        linear-gradient(145deg, #fff5ec, #eef9ff);
     overflow: hidden;
+}
+
+.hero-image::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.hero-image::after {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    right: -55px;
+    bottom: -55px;
+    border-radius: 50%;
+    background: var(--yellow);
+    opacity: 0.65;
 }
 
 .hero-toy {
     position: absolute;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    font-size: 55px;
+    width: 100px;
+    height: 100px;
+    border-radius: 28px;
+    font-size: 52px;
+    background: white;
     box-shadow: var(--shadow);
     animation: floatToy 4s ease-in-out infinite;
 }
 
 .toy-ball {
-    left: 13%;
-    top: 17%;
-    background: #fff;
+    top: 65px;
+    left: 55px;
+    background: #fff1a8;
 }
 
 .toy-bear {
-    right: 13%;
-    top: 13%;
-    background: #ffe8d6;
-    animation-delay: .5s;
+    top: 55px;
+    right: 55px;
+    background: #ffe1d1;
+    animation-delay: 0.7s;
 }
 
 .toy-car {
-    left: 24%;
-    bottom: 18%;
-    background: #dceeff;
-    animation-delay: 1s;
+    bottom: 70px;
+    left: 75px;
+    background: #d9efff;
+    animation-delay: 1.2s;
 }
 
 .toy-block {
-    right: 18%;
-    bottom: 20%;
-    background: #eee2ff;
-    animation-delay: 1.5s;
+    right: 80px;
+    bottom: 65px;
+    background: #eadcff;
+    animation-delay: 1.8s;
 }
 
 .hero-card {
     position: absolute;
+    z-index: 4;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 170px;
-    height: 170px;
-    border-radius: 35px;
-    background: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 25px 60px rgba(23, 32, 51, .14);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 20px 50px rgba(24, 32, 43, 0.13);
 }
 
 .hero-card strong {
     font-family: "Baloo 2", cursive;
-    font-size: 55px;
     color: var(--primary);
+    font-size: 42px;
     line-height: 1;
 }
 
 .hero-card span {
-    font-size: 12px;
-    font-weight: 800;
+    margin-top: 4px;
     color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
     letter-spacing: 1px;
 }
 
 @keyframes floatToy {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
+    0%,
+    100% {
+        transform: translateY(0) rotate(0);
     }
 
     50% {
-        transform: translateY(-14px) rotate(4deg);
+        transform: translateY(-12px) rotate(3deg);
     }
 }
+
 
 /* =========================================================
    AFFILIATE NOTICE
 ========================================================= */
 
 .affiliate-notice {
-    width: min(1180px, calc(100% - 40px));
-    margin: 10px auto 80px;
+    width: min(var(--container), calc(100% - 40px));
+    margin: 0 auto 90px;
     padding: 25px 30px;
     display: flex;
     align-items: flex-start;
     gap: 18px;
-    background: #fff9e9;
-    border: 1px solid #ffe8a3;
-    border-radius: 18px;
+    border: 1px solid #ffe0d4;
+    border-radius: 20px;
+    background: #fff9f6;
 }
 
 .affiliate-icon {
-    font-size: 28px;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: #ffe9df;
+    font-size: 22px;
 }
 
 .affiliate-notice strong {
-    display: block;
-    margin-bottom: 5px;
+    color: var(--dark);
+    font-size: 16px;
 }
 
 .affiliate-notice p {
+    margin-top: 5px;
+    font-size: 13px;
     color: var(--text);
-    font-size: 14px;
 }
+
 
 /* =========================================================
-   SECTION HEADINGS
+   TOYS
 ========================================================= */
 
-.toys-section,
-.categories,
-.stores-section,
-.affiliate-table-section,
-.why-section,
-.about {
-    padding-top: 80px;
-    padding-bottom: 80px;
+.toys-section {
+    padding-top: 30px;
+    padding-bottom: 100px;
 }
-
-.section-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 40px;
-    margin-bottom: 35px;
-}
-
-.section-heading > p {
-    max-width: 470px;
-    color: var(--muted);
-}
-
-.section-heading h2,
-.category-heading h2,
-.about h2 {
-    font-family: "Baloo 2", cursive;
-    font-size: clamp(38px, 5vw, 58px);
-    line-height: 1;
-}
-
-.centered {
-    text-align: center;
-    display: block;
-}
-
-.centered > p {
-    max-width: 650px;
-    margin: 18px auto 0;
-}
-
-/* =========================================================
-   FILTERS
-========================================================= */
 
 .filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 35px;
+    gap: 9px;
+    margin-bottom: 30px;
 }
 
 .filter-btn {
-    padding: 11px 19px;
+    padding: 11px 18px;
     border: 1px solid var(--border);
+    border-radius: 50px;
     background: white;
     color: var(--text);
-    border-radius: 30px;
     cursor: pointer;
-    font-weight: 600;
-    transition: .25s ease;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.25s ease;
 }
 
 .filter-btn:hover,
 .filter-btn.active {
-    color: white;
-    background: var(--primary);
     border-color: var(--primary);
+    background: var(--primary);
+    color: white;
 }
-
-/* =========================================================
-   TOY CARDS
-========================================================= */
 
 .toy-grid {
     display: grid;
@@ -474,12 +566,15 @@ section {
 }
 
 .toy-card {
-    background: white;
+    overflow: hidden;
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: transform .3s ease, box-shadow .3s ease;
+    background: white;
+    box-shadow: 0 8px 30px rgba(24, 32, 43, 0.05);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        opacity 0.3s ease;
 }
 
 .toy-card:hover {
@@ -488,8 +583,8 @@ section {
 }
 
 .toy-image {
-    min-height: 220px;
     position: relative;
+    height: 205px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -501,241 +596,262 @@ section {
     content: "";
     position: absolute;
     border-radius: 50%;
-    background: rgba(255, 255, 255, .5);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .toy-image::before {
-    width: 130px;
-    height: 130px;
+    width: 120px;
+    height: 120px;
     top: -35px;
-    right: -30px;
+    right: -25px;
 }
 
 .toy-image::after {
-    width: 90px;
-    height: 90px;
-    bottom: -30px;
+    width: 80px;
+    height: 80px;
+    bottom: -25px;
     left: -20px;
 }
 
 .toy-1 {
-    background: linear-gradient(135deg, #fff0b3, #ffd166);
+    background: linear-gradient(135deg, #fff0a8, #ffe2d6);
 }
 
 .toy-2 {
-    background: linear-gradient(135deg, #d9efff, #74c0fc);
+    background: linear-gradient(135deg, #cceeff, #dff7ff);
 }
 
 .toy-3 {
-    background: linear-gradient(135deg, #ffe3ec, #f783ac);
+    background: linear-gradient(135deg, #ffe1d5, #fff0ed);
 }
 
 .toy-4 {
-    background: linear-gradient(135deg, #eadcff, #b197fc);
+    background: linear-gradient(135deg, #e6d5ff, #f7eaff);
 }
 
 .toy-5 {
-    background: linear-gradient(135deg, #d8f5e3, #69db7c);
+    background: linear-gradient(135deg, #d7f2ff, #dfffe9);
 }
 
 .toy-6 {
-    background: linear-gradient(135deg, #fff0d6, #ffa94d);
+    background: linear-gradient(135deg, #fff1b9, #e9f8ff);
 }
 
 .toy-7 {
-    background: linear-gradient(135deg, #ffe3e3, #ff8787);
+    background: linear-gradient(135deg, #ffdce9, #fff0d9);
 }
 
 .toy-8 {
-    background: linear-gradient(135deg, #e1f5ff, #66d9e8);
+    background: linear-gradient(135deg, #d9ffe2, #dff4ff);
 }
 
 .toy-emoji {
     position: relative;
     z-index: 2;
-    font-size: 75px;
-    filter: drop-shadow(0 12px 12px rgba(0,0,0,.12));
-    transition: transform .3s ease;
-}
-
-.toy-card:hover .toy-emoji {
-    transform: scale(1.1) rotate(-3deg);
+    display: grid;
+    place-items: center;
+    width: 115px;
+    height: 115px;
+    border-radius: 35px;
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 12px 30px rgba(24, 32, 43, 0.08);
+    font-size: 62px;
 }
 
 .product-badge {
     position: absolute;
     z-index: 5;
-    left: 14px;
     top: 14px;
-    padding: 6px 10px;
-    background: white;
-    border-radius: 20px;
-    font-size: 10px;
+    left: 14px;
+    padding: 7px 10px;
+    border-radius: 50px;
+    background: var(--primary);
+    color: white;
+    font-size: 9px;
     font-weight: 800;
+    letter-spacing: 0.5px;
 }
 
 .product-badge.blue {
-    color: #1971c2;
+    background: var(--blue);
 }
 
 .product-badge.purple {
-    color: #7950f2;
+    background: var(--purple);
 }
 
 .product-badge.green {
-    color: #2b8a3e;
+    background: var(--green);
 }
 
 .toy-content {
-    padding: 20px;
+    padding: 21px;
 }
 
 .product-category {
     color: var(--primary);
     font-size: 10px;
     font-weight: 800;
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
 }
 
 .toy-content h3 {
+    margin-top: 5px;
     font-family: "Baloo 2", cursive;
-    font-size: 25px;
+    font-size: 24px;
     line-height: 1.1;
-    margin: 6px 0 10px;
 }
 
 .toy-content p {
+    min-height: 70px;
+    margin-top: 9px;
     color: var(--muted);
-    font-size: 13px;
-    line-height: 1.7;
-    min-height: 65px;
+    font-size: 12px;
 }
 
 .product-meta {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    margin: 15px 0;
-    font-size: 12px;
+    margin: 12px 0 17px;
+    font-size: 11px;
     font-weight: 700;
 }
 
 .rating {
-    color: #f59f00;
+    color: #f3a900;
 }
 
 .age {
+    padding: 4px 8px;
+    border-radius: 20px;
+    background: #f3f6f8;
     color: var(--muted);
 }
 
-.toy-btn {
+.toy-btn,
+.store-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    padding: 11px 14px;
+    min-height: 45px;
+    border-radius: 12px;
     background: var(--dark);
     color: white;
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 700;
+    transition: 0.25s ease;
 }
 
-.toy-btn:hover {
+.toy-btn:hover,
+.store-btn:hover {
     background: var(--primary);
+    transform: translateY(-2px);
 }
 
 .no-results {
     display: none;
+    padding: 40px;
     text-align: center;
-    padding: 30px;
     color: var(--muted);
+    border: 1px dashed var(--border);
+    border-radius: 18px;
 }
+
 
 /* =========================================================
    CATEGORIES
 ========================================================= */
 
 .categories {
-    max-width: none;
-    width: 100%;
-    padding-left: max(20px, calc((100% - 1180px) / 2));
-    padding-right: max(20px, calc((100% - 1180px) / 2));
-    background: var(--light);
+    padding-top: 30px;
+    padding-bottom: 110px;
 }
 
 .category-heading {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto 40px;
+    max-width: 650px;
+    margin-bottom: 35px;
 }
 
 .category-heading p {
-    margin-top: 15px;
+    margin-top: 12px;
     color: var(--muted);
+    font-size: 14px;
 }
 
 .category-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 18px;
 }
 
 .category-card {
-    min-height: 280px;
-    padding: 28px;
-    border: 0;
-    border-radius: 25px;
-    text-align: left;
-    cursor: pointer;
     position: relative;
+    min-height: 270px;
+    padding: 28px;
+    text-align: left;
     overflow: hidden;
-    transition: .3s ease;
+    border: 1px solid transparent;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s ease;
 }
 
 .category-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-7px);
     box-shadow: var(--shadow-hover);
 }
 
 .category-card strong {
-    font-size: 13px;
-    opacity: .55;
+    font-family: "Baloo 2", cursive;
+    font-size: 17px;
+    color: rgba(24, 32, 43, 0.45);
 }
 
 .category-icon {
     display: block;
-    font-size: 55px;
-    margin: 30px 0 20px;
+    margin-top: 35px;
+    font-size: 45px;
 }
 
 .category-card h3 {
+    margin-top: 15px;
     font-family: "Baloo 2", cursive;
-    font-size: 28px;
+    font-size: 27px;
 }
 
 .category-card p {
-    font-size: 13px;
-    margin-top: 5px;
+    margin-top: 4px;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .educational-category {
-    background: #fff0b3;
+    background: #fff2b8;
 }
 
 .vehicle-category {
-    background: #d9efff;
+    background: #d9f2ff;
 }
 
 .soft-category {
-    background: #ffe0eb;
+    background: #ffe0ec;
 }
 
 .creative-category {
-    background: #eadcff;
+    background: #e8dcff;
 }
+
 
 /* =========================================================
    STORES
 ========================================================= */
 
 .stores-section {
-    max-width: 1180px;
+    padding-top: 20px;
+    padding-bottom: 110px;
 }
 
 .store-grid {
@@ -746,11 +862,11 @@ section {
 
 .store-card {
     padding: 25px;
-    background: white;
     border: 1px solid var(--border);
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    transition: .3s ease;
+    border-radius: 22px;
+    background: white;
+    box-shadow: 0 8px 25px rgba(24, 32, 43, 0.045);
+    transition: 0.3s ease;
 }
 
 .store-card:hover {
@@ -759,116 +875,108 @@ section {
 }
 
 .store-icon {
-    width: 55px;
-    height: 55px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--light);
-    border-radius: 16px;
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    border-radius: 17px;
+    background: #fff2eb;
     font-size: 28px;
-    margin-bottom: 15px;
 }
 
 .store-location {
     display: inline-block;
+    margin-top: 18px;
     color: var(--primary);
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 800;
     letter-spacing: 1px;
 }
 
 .store-card h3 {
+    margin-top: 5px;
     font-family: "Baloo 2", cursive;
-    font-size: 25px;
-    margin: 6px 0 12px;
+    font-size: 24px;
+    line-height: 1.1;
 }
 
 .store-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-bottom: 13px;
+    margin-top: 12px;
 }
 
 .store-meta span {
     padding: 5px 8px;
-    background: #f6f7fa;
-    border-radius: 8px;
-    font-size: 10px;
+    border-radius: 7px;
+    background: #f5f7f9;
+    color: var(--text);
+    font-size: 9px;
     font-weight: 700;
 }
 
 .store-card p {
+    min-height: 62px;
+    margin: 14px 0 18px;
     color: var(--muted);
-    font-size: 13px;
-    line-height: 1.7;
-    min-height: 65px;
-    margin-bottom: 18px;
-}
-
-.store-btn {
-    width: 100%;
-    padding: 11px;
-    background: var(--dark);
-    color: white;
     font-size: 12px;
 }
 
-.store-btn:hover {
-    background: var(--primary);
-}
 
 /* =========================================================
    AFFILIATE TABLE
 ========================================================= */
 
 .affiliate-table-section {
-    max-width: none;
-    width: 100%;
-    background: var(--light);
-    padding-left: max(20px, calc((100% - 1180px) / 2));
-    padding-right: max(20px, calc((100% - 1180px) / 2));
+    padding-top: 30px;
+    padding-bottom: 110px;
 }
 
 .table-wrapper {
+    width: 100%;
     overflow-x: auto;
-    border-radius: 18px;
-    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    border-radius: 20px;
     background: white;
+    box-shadow: var(--shadow);
 }
 
 .affiliate-table {
     width: 100%;
     min-width: 850px;
     border-collapse: collapse;
-    background: white;
 }
 
 .affiliate-table th {
+    padding: 17px;
     background: var(--dark);
     color: white;
     text-align: left;
-    padding: 16px;
-    font-size: 12px;
+    font-size: 11px;
+    letter-spacing: 0.3px;
 }
 
 .affiliate-table td {
-    padding: 16px;
+    padding: 17px;
     border-bottom: 1px solid var(--border);
     color: var(--text);
-    font-size: 13px;
+    font-size: 12px;
 }
 
-.affiliate-table tr:last-child td {
+.affiliate-table tbody tr:last-child td {
     border-bottom: 0;
+}
+
+.affiliate-table tbody tr:hover {
+    background: #fffaf7;
 }
 
 .affiliate-table td strong {
     color: var(--dark);
 }
 
-.affiliate-table a {
+.affiliate-table td a {
     color: var(--primary);
     font-weight: 800;
 }
@@ -876,38 +984,49 @@ section {
 .table-note {
     margin-top: 15px;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 11px;
+    text-align: center;
 }
+
 
 /* =========================================================
    WHY
 ========================================================= */
 
 .why-section {
-    max-width: none;
-    width: 100%;
-    padding-left: max(20px, calc((100% - 1180px) / 2));
-    padding-right: max(20px, calc((100% - 1180px) / 2));
-    background: white;
+    padding-top: 20px;
+    padding-bottom: 110px;
 }
 
 .why-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    margin-top: 40px;
+    gap: 22px;
 }
 
 .why-card {
-    text-align: center;
-    padding: 35px 25px;
+    padding: 35px;
     border: 1px solid var(--border);
-    border-radius: 22px;
+    border-radius: 24px;
+    background: white;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.why-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
 }
 
 .why-icon {
-    font-size: 40px;
-    margin-bottom: 15px;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 18px;
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    background: #fff2eb;
+    font-size: 31px;
 }
 
 .why-card h3 {
@@ -916,10 +1035,11 @@ section {
 }
 
 .why-card p {
+    margin-top: 7px;
     color: var(--muted);
     font-size: 13px;
-    margin-top: 8px;
 }
+
 
 /* =========================================================
    DEALS
@@ -927,21 +1047,25 @@ section {
 
 .deals-section {
     position: relative;
-    overflow: hidden;
-    min-height: 420px;
-    padding: 80px max(20px, calc((100% - 1180px) / 2));
+    width: min(1240px, calc(100% - 40px));
+    min-height: 400px;
+    margin: 0 auto 100px;
+    padding: 65px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 40px;
-    background: linear-gradient(135deg, #ff6b6b, #ff8787);
-    color: white;
+    overflow: hidden;
+    border-radius: 35px;
+    background:
+        radial-gradient(circle at 90% 15%, rgba(255, 255, 255, 0.3), transparent 22%),
+        linear-gradient(135deg, #ff7542, #ff9a63);
 }
 
 .deal-content {
-    max-width: 650px;
     position: relative;
-    z-index: 2;
+    z-index: 5;
+    max-width: 650px;
 }
 
 .deal-content .section-label {
@@ -949,20 +1073,18 @@ section {
 }
 
 .deal-content h2 {
-    font-family: "Baloo 2", cursive;
-    font-size: clamp(42px, 5vw, 62px);
-    line-height: 1;
-    margin-bottom: 20px;
+    color: white;
 }
 
 .deal-content h2 span {
-    color: #fff1a8;
+    color: #ffe07a;
 }
 
 .deal-content p {
-    max-width: 600px;
-    opacity: .9;
-    margin-bottom: 25px;
+    max-width: 540px;
+    margin: 17px 0 25px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
 }
 
 .white-btn {
@@ -971,120 +1093,123 @@ section {
 }
 
 .white-btn:hover {
-    background: #fff5f5;
-    color: var(--primary-dark);
+    background: #fff8f4;
 }
 
 .deal-visual {
-    width: 330px;
-    height: 300px;
     position: relative;
-    flex-shrink: 0;
+    width: 330px;
+    height: 280px;
+    flex: 0 0 330px;
 }
 
 .deal-circle {
     position: absolute;
-    width: 100px;
-    height: 100px;
+    display: grid;
+    place-items: center;
+    width: 105px;
+    height: 105px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,.18);
-    backdrop-filter: blur(8px);
-    font-size: 45px;
-    animation: floatToy 4s infinite;
+    background: white;
+    box-shadow: 0 20px 40px rgba(90, 38, 17, 0.15);
+    font-size: 42px;
+    animation: floatToy 4s ease-in-out infinite;
 }
 
 .circle-one {
-    top: 15px;
-    left: 40px;
+    top: 20px;
+    left: 15px;
 }
 
 .circle-two {
-    right: 30px;
-    top: 80px;
-    animation-delay: .8s;
+    right: 15px;
+    top: 70px;
+    animation-delay: 0.8s;
 }
 
 .circle-three {
-    left: 100px;
+    left: 105px;
     bottom: 10px;
-    animation-delay: 1.4s;
+    animation-delay: 1.5s;
 }
+
 
 /* =========================================================
    ABOUT
 ========================================================= */
 
 .about {
+    padding-top: 20px;
+    padding-bottom: 110px;
     text-align: center;
-    max-width: 850px;
 }
 
 .about h2 {
-    margin-bottom: 20px;
+    margin-top: 3px;
 }
 
 .about > p {
+    max-width: 760px;
+    margin: 20px auto 27px;
     color: var(--muted);
-    max-width: 750px;
-    margin: 0 auto 25px;
-    line-height: 1.9;
+    font-size: 14px;
 }
+
 
 /* =========================================================
    FINAL CTA
 ========================================================= */
 
 .final-cta {
-    width: min(1180px, calc(100% - 40px));
-    margin: 20px auto 80px;
-    padding: 55px;
-    border-radius: 30px;
-    background: var(--dark);
-    color: white;
+    width: 100%;
+    padding: 65px max(30px, calc((100% - 1180px) / 2));
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     gap: 30px;
+    background: var(--dark);
 }
 
-.final-cta > div > span {
-    color: #ffd166;
-    font-size: 12px;
+.final-cta > div {
+    max-width: 700px;
+}
+
+.final-cta span {
+    color: var(--yellow);
+    font-size: 11px;
     font-weight: 800;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
 
 .final-cta h2 {
-    font-family: "Baloo 2", cursive;
-    font-size: 45px;
-    line-height: 1.05;
-    margin: 10px 0;
+    margin-top: 7px;
+    color: white;
 }
 
 .final-cta h2 strong {
-    color: #ffd166;
+    color: var(--primary);
 }
 
 .final-cta p {
-    color: #bfc6d4;
+    margin-top: 10px;
+    color: #b7c0ca;
+    font-size: 13px;
 }
+
 
 /* =========================================================
    FOOTER
 ========================================================= */
 
 footer {
-    background: #111827;
+    background: #101720;
     color: white;
 }
 
 .footer-top {
     width: min(1180px, calc(100% - 40px));
     margin: auto;
-    padding: 60px 0 40px;
+    padding: 60px 0 45px;
     display: flex;
     justify-content: space-between;
     gap: 50px;
@@ -1095,42 +1220,48 @@ footer {
 }
 
 .footer-top p {
-    color: #bfc6d4;
-    margin: 8px 0;
+    margin-top: 12px;
+    color: #c0c7cf;
+    font-size: 13px;
 }
 
 .footer-top small {
     display: block;
-    max-width: 380px;
-    color: #8f98a9;
+    max-width: 400px;
+    margin-top: 7px;
+    color: #78828d;
     font-size: 11px;
 }
 
 .footer-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px 25px;
     align-content: flex-start;
+    justify-content: flex-end;
+    gap: 8px 18px;
     max-width: 500px;
 }
 
 .footer-links a {
-    color: #c9cfda;
-    font-size: 13px;
+    color: #c0c7cf;
+    font-size: 12px;
+    transition: 0.2s ease;
 }
 
 .footer-links a:hover {
-    color: white;
+    color: var(--primary);
 }
 
 .copyright {
     width: min(1180px, calc(100% - 40px));
     margin: auto;
-    padding: 20px 0;
-    border-top: 1px solid rgba(255,255,255,.08);
-    color: #8f98a9;
-    font-size: 12px;
+    padding: 20px 0 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: #6f7985;
+    font-size: 11px;
+    text-align: center;
 }
+
 
 /* =========================================================
    SCROLL REVEAL
@@ -1138,8 +1269,10 @@ footer {
 
 .reveal-element {
     opacity: 0;
-    transform: translateY(25px);
-    transition: opacity .7s ease, transform .7s ease;
+    transform: translateY(20px);
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
 }
 
 .reveal-element.revealed {
@@ -1147,47 +1280,66 @@ footer {
     transform: translateY(0);
 }
 
+
 /* =========================================================
-   TABLET
+   MOBILE
 ========================================================= */
 
 @media (max-width: 1050px) {
 
     .nav-links {
-        gap: 2px;
+        gap: 0;
     }
 
     .nav-links a {
-        padding: 9px 8px;
+        padding-left: 9px;
+        padding-right: 9px;
         font-size: 12px;
     }
 
     .hero {
-        gap: 35px;
+        grid-template-columns: 1fr;
+        padding-top: 55px;
     }
 
-    .toy-grid {
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero-content > p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons,
+    .hero-trust {
+        justify-content: center;
+    }
+
+    .hero-image {
+        min-height: 420px;
+    }
+
+    .toy-grid,
+    .store-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
     .category-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-
-    .store-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
 }
 
+
 /* =========================================================
-   MOBILE NAV
+   TABLET / MOBILE NAV
 ========================================================= */
 
 @media (max-width: 800px) {
 
     .nav-container {
-        min-height: 68px;
+        min-height: 70px;
+        width: min(100% - 30px, 1180px);
     }
 
     .menu-btn {
@@ -1196,36 +1348,44 @@ footer {
 
     .nav-links {
         position: absolute;
-        top: 68px;
-        left: 20px;
-        right: 20px;
-        display: none;
+        top: 70px;
+        left: 15px;
+        right: 15px;
+
+        display: flex;
         flex-direction: column;
         align-items: stretch;
-        gap: 4px;
-        padding: 12px;
-        background: white;
+
+        padding: 10px;
         border: 1px solid var(--border);
-        border-radius: 16px;
-        box-shadow: var(--shadow-hover);
+        border-radius: 18px;
+        background: white;
+        box-shadow: 0 20px 50px rgba(24, 32, 43, 0.13);
+
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: 0.25s ease;
     }
 
     .nav-links.active {
-        display: flex;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
     }
 
     .nav-links a {
         padding: 12px 15px;
-        font-size: 14px;
+        border-radius: 10px;
+        font-size: 13px;
     }
 
-    .hero {
-        grid-template-columns: 1fr;
-        padding-top: 45px;
+    .nav-links a:hover {
+        background: #fff4ef;
     }
 
-    .hero-image {
-        min-height: 400px;
+    .nav-links a::after {
+        display: none;
     }
 
     .section-heading {
@@ -1233,11 +1393,11 @@ footer {
     }
 
     .section-heading > p {
-        margin-top: 15px;
+        margin-top: 12px;
     }
 
     .deals-section {
-        display: block;
+        padding: 50px 35px;
     }
 
     .deal-visual {
@@ -1245,23 +1405,21 @@ footer {
     }
 
     .final-cta {
-        display: block;
-        padding: 35px 25px;
-    }
-
-    .final-cta .main-btn {
-        margin-top: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 55px;
+        padding-bottom: 55px;
     }
 
     .footer-top {
-        display: block;
+        flex-direction: column;
     }
 
     .footer-links {
-        margin-top: 30px;
+        justify-content: flex-start;
     }
-
 }
+
 
 /* =========================================================
    SMALL MOBILE
@@ -1269,107 +1427,174 @@ footer {
 
 @media (max-width: 560px) {
 
-    .nav-container,
     .hero,
     .toys-section,
+    .categories,
     .stores-section,
-    .about,
-    .final-cta,
-    .footer-top,
-    .copyright {
-        width: min(100% - 28px, 1180px);
+    .affiliate-table-section,
+    .why-section,
+    .about {
+        width: min(100% - 26px, var(--container));
+    }
+
+    .hero {
+        min-height: auto;
+        padding-top: 45px;
+        padding-bottom: 55px;
     }
 
     .hero h1 {
-        font-size: 50px;
+        font-size: 53px;
+        letter-spacing: -1px;
     }
 
     .hero-content > p {
         font-size: 14px;
     }
 
-    .hero-trust {
-        gap: 25px;
+    .hero-buttons {
+        flex-direction: column;
     }
 
-    .hero-trust strong {
-        font-size: 25px;
+    .main-btn,
+    .secondary-btn {
+        width: 100%;
+    }
+
+    .hero-trust {
+        gap: 22px;
     }
 
     .hero-image {
-        min-height: 330px;
-        border-radius: 25px;
+        min-height: 340px;
+        border-radius: 30px;
     }
 
     .hero-toy {
-        width: 75px;
-        height: 75px;
-        font-size: 38px;
+        width: 70px;
+        height: 70px;
+        border-radius: 20px;
+        font-size: 35px;
+    }
+
+    .toy-ball {
+        top: 40px;
+        left: 25px;
+    }
+
+    .toy-bear {
+        top: 35px;
+        right: 25px;
+    }
+
+    .toy-car {
+        bottom: 40px;
+        left: 30px;
+    }
+
+    .toy-block {
+        right: 30px;
+        bottom: 35px;
     }
 
     .hero-card {
-        width: 125px;
-        height: 125px;
+        width: 115px;
+        height: 115px;
     }
 
     .hero-card strong {
-        font-size: 38px;
+        font-size: 32px;
+    }
+
+    .affiliate-notice {
+        width: calc(100% - 26px);
+        margin-bottom: 65px;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 42px;
     }
 
     .toy-grid,
-    .category-grid,
     .store-grid,
+    .category-grid,
     .why-grid {
         grid-template-columns: 1fr;
+    }
+
+    .toy-image {
+        height: 220px;
     }
 
     .category-card {
         min-height: 230px;
     }
 
-    .affiliate-notice {
-        width: calc(100% - 28px);
-        padding: 20px;
+    .filters {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 5px;
+    }
+
+    .filter-btn {
+        flex: 0 0 auto;
+    }
+
+    .stores-section,
+    .toys-section,
+    .categories,
+    .affiliate-table-section,
+    .why-section,
+    .about {
+        padding-bottom: 75px;
     }
 
     .deals-section {
-        padding: 60px 20px;
+        width: calc(100% - 26px);
+        margin-bottom: 70px;
+        padding: 42px 25px;
+        border-radius: 27px;
     }
 
-    .deal-content h2 {
-        font-size: 44px;
+    .footer-top {
+        width: calc(100% - 26px);
+        padding-top: 45px;
     }
 
-    .final-cta h2 {
-        font-size: 38px;
+    .copyright {
+        width: calc(100% - 26px);
     }
-
-    .footer-links {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
-
 }
+
 
 /* =========================================================
    ACCESSIBILITY
 ========================================================= */
 
-:focus-visible {
-    outline: 3px solid rgba(77, 171, 247, .45);
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid rgba(77, 171, 247, 0.55);
     outline-offset: 3px;
 }
 
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
 @media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
 
     *,
     *::before,
     *::after {
-        scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
+        animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
+        transition-duration: 0.01ms !important;
     }
-
 }
 ```
