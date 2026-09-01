@@ -1,395 +1,513 @@
 ```javascript
 /* =========================================================
    KIDDOPLAY - MAIN JAVASCRIPT
-   Affiliate Kids Toys Website
-   Updated: Affiliate Stores + Tracking + Filters
+   FIXED VERSION
 ========================================================= */
 
 "use strict";
 
 
 /* =========================================================
-   MOBILE MENU
+   DOM READY
 ========================================================= */
 
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.getElementById("navLinks");
+document.addEventListener("DOMContentLoaded", () => {
 
-function closeMobileMenu() {
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
 
-    if (!navLinks || !menuBtn) return;
+    const menuBtn =
+        document.getElementById("menuBtn");
 
-    navLinks.classList.remove("active");
+    const navLinks =
+        document.getElementById("navLinks");
 
-    menuBtn.textContent = "☰";
+    const filterButtons =
+        document.querySelectorAll(".filter-btn");
 
-    menuBtn.setAttribute("aria-label", "Open menu");
-    menuBtn.setAttribute("aria-expanded", "false");
-}
+    const toyCards =
+        document.querySelectorAll(".toy-card");
+
+    const categoryCards =
+        document.querySelectorAll(".category-card");
+
+    const noResults =
+        document.getElementById("noResults");
+
+    const storeCards =
+        document.querySelectorAll(".store-card");
+
+    const productButtons =
+        document.querySelectorAll(".toy-card .toy-btn");
 
 
-if (menuBtn && navLinks) {
 
-    menuBtn.addEventListener("click", () => {
+    /* =====================================================
+       MOBILE MENU
+    ===================================================== */
 
-        const isOpen =
-            navLinks.classList.toggle("active");
+    function closeMenu() {
 
-        menuBtn.textContent =
-            isOpen ? "✕" : "☰";
+        if (!navLinks || !menuBtn) return;
 
-        menuBtn.setAttribute(
-            "aria-label",
-            isOpen ? "Close menu" : "Open menu"
-        );
+        navLinks.classList.remove("active");
+
+        menuBtn.textContent = "☰";
 
         menuBtn.setAttribute(
             "aria-expanded",
-            isOpen ? "true" : "false"
+            "false"
         );
 
-    });
-
-}
-
-
-/* =========================================================
-   CLOSE MENU AFTER NAVIGATION
-========================================================= */
-
-const navItems =
-    document.querySelectorAll(".nav-links a");
-
-navItems.forEach((link) => {
-
-    link.addEventListener("click", () => {
-
-        closeMobileMenu();
-
-    });
-
-});
-
-
-/* =========================================================
-   TOY FILTER SYSTEM
-========================================================= */
-
-const filterButtons =
-    document.querySelectorAll(".filter-btn");
-
-const toyCards =
-    document.querySelectorAll(".toy-card");
-
-const noResults =
-    document.getElementById("noResults");
-
-
-function filterToys(filter) {
-
-    let visibleToys = 0;
-
-    toyCards.forEach((card) => {
-
-        const category =
-            card.dataset.category || "";
-
-        const shouldShow =
-            filter === "all" ||
-            category === filter;
-
-        if (shouldShow) {
-
-            card.style.display = "";
-
-            card.style.opacity = "0";
-            card.style.transform =
-                "translateY(12px)";
-
-            requestAnimationFrame(() => {
-
-                card.style.opacity = "1";
-                card.style.transform =
-                    "translateY(0)";
-
-            });
-
-            visibleToys++;
-
-        } else {
-
-            card.style.display = "none";
-
-        }
-
-    });
-
-
-    if (noResults) {
-
-        noResults.style.display =
-            visibleToys === 0
-                ? "block"
-                : "none";
-
+        menuBtn.setAttribute(
+            "aria-label",
+            "Open menu"
+        );
     }
 
-}
 
+    if (menuBtn && navLinks) {
 
-/* =========================================================
-   FILTER BUTTONS
-========================================================= */
+        menuBtn.addEventListener("click", () => {
 
-filterButtons.forEach((button) => {
+            const opened =
+                navLinks.classList.toggle("active");
 
-    button.addEventListener("click", () => {
+            menuBtn.textContent =
+                opened ? "✕" : "☰";
 
-        filterButtons.forEach((btn) => {
-            btn.classList.remove("active");
+            menuBtn.setAttribute(
+                "aria-expanded",
+                opened ? "true" : "false"
+            );
+
+            menuBtn.setAttribute(
+                "aria-label",
+                opened
+                    ? "Close menu"
+                    : "Open menu"
+            );
+
         });
 
-        button.classList.add("active");
-
-        const selectedFilter =
-            button.dataset.filter || "all";
-
-        filterToys(selectedFilter);
-
-    });
-
-});
-
-
-/* =========================================================
-   CATEGORY CARD FILTERING
-========================================================= */
-
-const categoryCards =
-    document.querySelectorAll(".category-card");
-
-
-categoryCards.forEach((categoryCard) => {
-
-    categoryCard.addEventListener("click", () => {
-
-        const selectedCategory =
-            categoryCard.dataset.categoryLink;
-
-        if (!selectedCategory) return;
-
-        const matchingButton =
-            document.querySelector(
-                `.filter-btn[data-filter="${selectedCategory}"]`
-            );
-
-        if (matchingButton) {
-
-            matchingButton.click();
-
-        }
-
-    });
-
-});
-
-
-/* =========================================================
-   TOYS NAVIGATION
-   Reset filter to ALL
-========================================================= */
-
-const toysNavLink =
-    document.querySelector(
-        '.nav-links a[href="#toys"]'
-    );
-
-
-if (toysNavLink) {
-
-    toysNavLink.addEventListener("click", () => {
-
-        const allButton =
-            document.querySelector(
-                '.filter-btn[data-filter="all"]'
-            );
-
-        if (allButton) {
-            allButton.click();
-        }
-
-    });
-
-}
-
-
-/* =========================================================
-   AFFILIATE STORE DATA
-========================================================= */
-
-const affiliateStores = {
-
-    "justforkids.pk": {
-        name: "JustForKids.pk",
-        commission: "Up to 20%",
-        cookie: "Application details",
-        market: "Pakistan",
-        tracking: "Affiliate tracking"
-    },
-
-    "montessorigeneration.com": {
-        name: "Montessori Generation",
-        commission: "25%",
-        cookie: "30 days",
-        market: "International",
-        tracking: "Affiliate tracking"
-    },
-
-    "tobouy.com": {
-        name: "Tobouy",
-        commission: "Up to 15%",
-        cookie: "Program details",
-        market: "International",
-        tracking: "Affiliate tracking"
-    },
-
-    "tumama-kids.com": {
-        name: "Tumama Kids",
-        commission: "10–15%",
-        cookie: "30 days",
-        market: "International",
-        tracking: "Affiliate tracking"
-    },
-
-    "thebestkidstoys.com": {
-        name: "Best Kids Toys",
-        commission: "10%",
-        cookie: "Program details",
-        market: "International",
-        tracking: "Affiliate tracking"
-    },
-
-    "sainsmartjr.com": {
-        name: "SainSmart Jr.",
-        commission: "6%",
-        cookie: "Program details",
-        market: "International",
-        tracking: "Affiliate tracking"
-    },
-
-    "schoolcrafts.com.pk": {
-        name: "School Crafts Pakistan",
-        commission: "5%",
-        cookie: "Program details",
-        market: "Pakistan",
-        tracking: "Affiliate tracking"
-    },
-
-    "goto.com.pk": {
-        name: "Goto Pakistan",
-        commission: "2% Baby/Toys & Kids",
-        cookie: "Affiliate tracking",
-        market: "Pakistan",
-        tracking: "Affiliate tracking"
     }
 
-};
+
+    /* Close mobile menu after navigation */
+
+    document
+        .querySelectorAll(".nav-links a")
+        .forEach((link) => {
+
+            link.addEventListener(
+                "click",
+                closeMenu
+            );
+
+        });
 
 
-/* =========================================================
-   GET STORE INFORMATION
-========================================================= */
 
-function getStoreInfo(url) {
+    /* =====================================================
+       TOY FILTER
+    ===================================================== */
 
-    if (!url) return null;
+    function filterToys(category) {
 
-    try {
+        let visibleCount = 0;
 
-        const hostname =
-            new URL(url).hostname
-                .replace("www.", "")
-                .toLowerCase();
 
-        for (const domain in affiliateStores) {
+        toyCards.forEach((card) => {
 
-            if (hostname.includes(domain)) {
+            const cardCategory =
+                card.dataset.category;
 
-                return affiliateStores[domain];
+
+            const show =
+                category === "all" ||
+                cardCategory === category;
+
+
+            if (show) {
+
+                card.style.display = "";
+
+                visibleCount++;
+
+
+                /* Re-trigger animation */
+
+                card.classList.remove(
+                    "filter-show"
+                );
+
+                void card.offsetWidth;
+
+                card.classList.add(
+                    "filter-show"
+                );
+
+            } else {
+
+                card.style.display = "none";
 
             }
 
+        });
+
+
+        /* No result message */
+
+        if (noResults) {
+
+            noResults.style.display =
+                visibleCount === 0
+                    ? "block"
+                    : "none";
+
         }
 
-    } catch (error) {
+    }
 
-        console.warn(
-            "Invalid affiliate URL:",
-            url
+
+
+    /* =====================================================
+       FILTER BUTTON CLICK
+    ===================================================== */
+
+    filterButtons.forEach((button) => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const selected =
+                    button.dataset.filter;
+
+                if (!selected) return;
+
+
+                /* Active button */
+
+                filterButtons.forEach(
+                    (btn) => {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                /* Filter toys */
+
+                filterToys(selected);
+
+
+                /*
+                   Update URL hash without
+                   creating unnecessary page jump.
+                */
+
+                if (
+                    window.history &&
+                    window.history.replaceState
+                ) {
+
+                    const hash =
+                        selected === "all"
+                            ? "#toys"
+                            : "#toys-" + selected;
+
+                    window.history.replaceState(
+                        null,
+                        "",
+                        hash
+                    );
+
+                }
+
+            }
+        );
+
+    });
+
+
+
+    /* =====================================================
+       CATEGORY CARD CLICK
+    ===================================================== */
+
+    categoryCards.forEach((categoryCard) => {
+
+        categoryCard.addEventListener(
+            "click",
+            (event) => {
+
+                const category =
+                    categoryCard.dataset.categoryLink;
+
+                if (!category) return;
+
+
+                const matchingButton =
+                    document.querySelector(
+                        `.filter-btn[data-filter="${category}"]`
+                    );
+
+
+                if (matchingButton) {
+
+                    /*
+                       Prevent default anchor
+                       jump so filter happens first.
+                    */
+
+                    event.preventDefault();
+
+                    matchingButton.click();
+
+
+                    const toysSection =
+                        document.getElementById(
+                            "toys"
+                        );
+
+
+                    if (toysSection) {
+
+                        setTimeout(() => {
+
+                            toysSection.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start"
+                            });
+
+                        }, 50);
+
+                    }
+
+                }
+
+            }
+        );
+
+    });
+
+
+
+    /* =====================================================
+       TOYS NAV LINK
+       Always reset to ALL
+    ===================================================== */
+
+    const toysNav =
+        document.querySelector(
+            '.nav-links a[href="#toys"]'
+        );
+
+
+    if (toysNav) {
+
+        toysNav.addEventListener(
+            "click",
+            () => {
+
+                const allButton =
+                    document.querySelector(
+                        '.filter-btn[data-filter="all"]'
+                    );
+
+
+                if (allButton) {
+
+                    allButton.click();
+
+                }
+
+            }
         );
 
     }
 
-    return null;
-
-}
 
 
-/* =========================================================
-   STORE CARDS
-   Automatically add affiliate information
-========================================================= */
+    /* =====================================================
+       AFFILIATE STORE INFORMATION
+    ===================================================== */
 
-const storeCards =
-    document.querySelectorAll(".store-card");
+    const affiliateStores = {
+
+        "justforkids.pk": {
+            name: "JustForKids.pk",
+            commission: "Up to 20%",
+            cookie: "Application details",
+            market: "Pakistan"
+        },
+
+        "montessorigeneration.com": {
+            name: "Montessori Generation",
+            commission: "25%",
+            cookie: "30 days",
+            market: "International"
+        },
+
+        "tobouy.com": {
+            name: "Tobouy",
+            commission: "Up to 15%",
+            cookie: "Program details",
+            market: "International"
+        },
+
+        "tumama-kids.com": {
+            name: "Tumama Kids",
+            commission: "10–15%",
+            cookie: "30 days",
+            market: "International"
+        },
+
+        "thebestkidstoys.com": {
+            name: "Best Kids Toys",
+            commission: "10%",
+            cookie: "Program details",
+            market: "International"
+        },
+
+        "sainsmartjr.com": {
+            name: "SainSmart Jr.",
+            commission: "6%",
+            cookie: "Program details",
+            market: "International"
+        },
+
+        "schoolcrafts.com.pk": {
+            name: "School Crafts Pakistan",
+            commission: "5%",
+            cookie: "Program details",
+            market: "Pakistan"
+        },
+
+        "goto.com.pk": {
+            name: "Goto Pakistan",
+            commission: "2% Baby/Toys & Kids",
+            cookie: "Affiliate tracking",
+            market: "Pakistan"
+        }
+
+    };
 
 
-storeCards.forEach((card) => {
 
-    const href =
-        card.getAttribute("href");
+    /* =====================================================
+       FIND STORE
+    ===================================================== */
 
-    const store =
-        getStoreInfo(href);
+    function getStore(url) {
 
-    if (!store) return;
+        if (!url) return null;
 
+        try {
 
-    /*
-       Add data attributes so CSS/analytics
-       can identify each affiliate store.
-    */
-
-    card.dataset.store =
-        store.name;
-
-    card.dataset.commission =
-        store.commission;
-
-    card.dataset.market =
-        store.market;
+            const hostname =
+                new URL(url)
+                    .hostname
+                    .replace(/^www\./, "")
+                    .toLowerCase();
 
 
-    /*
-       Add affiliate details if they don't
-       already exist in HTML.
-    */
+            const domain =
+                Object.keys(affiliateStores)
+                    .find((item) =>
+                        hostname === item ||
+                        hostname.endsWith("." + item)
+                    );
 
-    let meta =
-        card.querySelector(".affiliate-meta");
+
+            return domain
+                ? affiliateStores[domain]
+                : null;
+
+        } catch (error) {
+
+            return null;
+
+        }
+
+    }
 
 
-    if (!meta) {
 
-        meta =
+    /* =====================================================
+       ADD STORE META
+    ===================================================== */
+
+    storeCards.forEach((card) => {
+
+        const url =
+            card.getAttribute("href");
+
+        const store =
+            getStore(url);
+
+
+        if (!store) return;
+
+
+        /* Store data */
+
+        card.dataset.store =
+            store.name;
+
+        card.dataset.commission =
+            store.commission;
+
+        card.dataset.cookie =
+            store.cookie;
+
+        card.dataset.market =
+            store.market;
+
+
+        /*
+           Don't duplicate metadata
+           if HTML already contains it.
+        */
+
+        if (
+            card.querySelector(
+                ".affiliate-meta"
+            )
+        ) {
+            return;
+        }
+
+
+        const storeInfo =
+            card.querySelector(
+                ".store-info"
+            );
+
+
+        if (!storeInfo) return;
+
+
+        const meta =
             document.createElement("div");
 
         meta.className =
             "affiliate-meta";
 
+
         meta.innerHTML = `
             <span class="commission-badge">
-                ${store.commission} commission
+                ${store.commission}
             </span>
 
             <span class="tracking-badge">
@@ -397,405 +515,391 @@ storeCards.forEach((card) => {
             </span>
         `;
 
-        const storeInfo =
-            card.querySelector(".store-info");
 
-        if (storeInfo) {
-
-            const storeLink =
-                storeInfo.querySelector(".store-link");
-
-            if (storeLink) {
-
-                storeInfo.insertBefore(
-                    meta,
-                    storeLink
-                );
-
-            } else {
-
-                storeInfo.appendChild(meta);
-
-            }
-
-        }
-
-    }
-
-});
-
-
-/* =========================================================
-   EXTERNAL LINK SECURITY
-========================================================= */
-
-const externalLinks =
-    document.querySelectorAll(
-        'a[href^="http://"], a[href^="https://"]'
-    );
-
-
-externalLinks.forEach((link) => {
-
-    link.setAttribute(
-        "target",
-        "_blank"
-    );
-
-    link.setAttribute(
-        "rel",
-        "nofollow sponsored noopener noreferrer"
-    );
-
-});
-
-
-/* =========================================================
-   STORE CLICK TRACKING
-========================================================= */
-
-storeCards.forEach((card) => {
-
-    card.addEventListener("click", () => {
-
-        const storeName =
-            card.dataset.store ||
-            card.querySelector("h3")?.textContent.trim() ||
-            "Unknown Store";
-
-        const commission =
-            card.dataset.commission ||
-            "Unknown";
-
-        console.log(
-            "Affiliate store clicked:",
-            storeName
-        );
-
-        console.log(
-            "Commission:",
-            commission
-        );
-
-
-        /*
-           Google Analytics 4 support.
-
-           If GA4 is installed, this event
-           will automatically be sent.
-        */
-
-        if (typeof window.gtag === "function") {
-
-            window.gtag(
-                "event",
-                "affiliate_store_click",
-                {
-                    store_name: storeName,
-                    commission: commission
-                }
+        const storeLink =
+            storeInfo.querySelector(
+                ".store-link"
             );
+
+
+        if (storeLink) {
+
+            storeInfo.insertBefore(
+                meta,
+                storeLink
+            );
+
+        } else {
+
+            storeInfo.appendChild(meta);
 
         }
 
     });
 
-});
 
 
-/* =========================================================
-   PRODUCT CLICK TRACKING
-========================================================= */
+    /* =====================================================
+       EXTERNAL LINKS
+    ===================================================== */
 
-const productButtons =
-    document.querySelectorAll(
-        ".toy-card .toy-btn"
-    );
+    document
+        .querySelectorAll(
+            'a[href^="http://"], a[href^="https://"]'
+        )
+        .forEach((link) => {
 
-
-productButtons.forEach((button) => {
-
-    button.addEventListener("click", (event) => {
-
-        const href =
-            button.getAttribute("href");
-
-
-        /*
-           Stop empty # links.
-        */
-
-        if (
-            !href ||
-            href === "#"
-        ) {
-
-            event.preventDefault();
-
-            console.warn(
-                "Affiliate product URL not added yet:",
-                button
+            link.setAttribute(
+                "target",
+                "_blank"
             );
 
-            return;
-
-        }
-
-
-        const card =
-            button.closest(".toy-card");
-
-        if (!card) return;
-
-
-        const productName =
-            card.querySelector("h3")?.textContent.trim() ||
-            "Unknown Product";
-
-        const productCategory =
-            card.querySelector(".product-category")?.textContent.trim() ||
-            "Unknown Category";
-
-        const productAge =
-            card.querySelector(".age")?.textContent.trim() ||
-            "Unknown Age";
-
-
-        console.log(
-            "Affiliate product clicked:",
-            productName
-        );
-
-        console.log(
-            "Category:",
-            productCategory
-        );
-
-        console.log(
-            "Age:",
-            productAge
-        );
-
-
-        /*
-           Google Analytics 4
-        */
-
-        if (typeof window.gtag === "function") {
-
-            window.gtag(
-                "event",
-                "affiliate_product_click",
-                {
-                    product_name: productName,
-                    category: productCategory,
-                    age_group: productAge,
-                    destination: href
-                }
+            link.setAttribute(
+                "rel",
+                "nofollow sponsored noopener noreferrer"
             );
 
-        }
-
-    });
-
-});
-
-
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
-
-const revealElements =
-    document.querySelectorAll(
-        ".toy-card, .category-card, .why-card, .affiliate-notice, .store-card"
-    );
-
-
-if (
-    "IntersectionObserver" in window &&
-    revealElements.length
-) {
-
-    const observer =
-        new IntersectionObserver(
-            (entries, observerInstance) => {
-
-                entries.forEach((entry) => {
-
-                    if (
-                        entry.isIntersecting
-                    ) {
-
-                        entry.target.classList.add(
-                            "revealed"
-                        );
-
-                        observerInstance.unobserve(
-                            entry.target
-                        );
-
-                    }
-
-                });
-
-            },
-            {
-                threshold: 0.08
-            }
-        );
-
-
-    revealElements.forEach((element) => {
-
-        element.classList.add(
-            "reveal-element"
-        );
-
-        observer.observe(element);
-
-    });
-
-}
-
-
-/* =========================================================
-   SMOOTH SCROLL FOR HASH LINKS
-========================================================= */
-
-const hashLinks =
-    document.querySelectorAll(
-        'a[href^="#"]'
-    );
-
-
-hashLinks.forEach((link) => {
-
-    link.addEventListener("click", (event) => {
-
-        const targetId =
-            link.getAttribute("href");
-
-        if (
-            !targetId ||
-            targetId === "#"
-        ) {
-            return;
-        }
-
-
-        const target =
-            document.querySelector(targetId);
-
-        if (!target) return;
-
-
-        event.preventDefault();
-
-        target.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
         });
 
+
+
+    /* =====================================================
+       STORE CLICK TRACKING
+    ===================================================== */
+
+    storeCards.forEach((card) => {
+
+        card.addEventListener(
+            "click",
+            () => {
+
+                const storeName =
+                    card.dataset.store ||
+                    "Unknown Store";
+
+
+                const commission =
+                    card.dataset.commission ||
+                    "Unknown";
+
+
+                console.log(
+                    "KiddoPlay Affiliate Store:",
+                    storeName
+                );
+
+                console.log(
+                    "Commission:",
+                    commission
+                );
+
+
+                /*
+                   Google Analytics 4
+                   works automatically if
+                   gtag is installed.
+                */
+
+                if (
+                    typeof window.gtag ===
+                    "function"
+                ) {
+
+                    window.gtag(
+                        "event",
+                        "affiliate_store_click",
+                        {
+                            store_name:
+                                storeName,
+
+                            commission:
+                                commission
+                        }
+                    );
+
+                }
+
+            }
+        );
+
     });
 
-});
 
 
-/* =========================================================
-   ESC KEY
-   Close mobile menu
-========================================================= */
+    /* =====================================================
+       PRODUCT CLICK TRACKING
+    ===================================================== */
 
-document.addEventListener(
-    "keydown",
-    (event) => {
+    productButtons.forEach((button) => {
 
-        if (
-            event.key === "Escape" &&
-            navLinks?.classList.contains("active")
-        ) {
+        button.addEventListener(
+            "click",
+            (event) => {
 
-            closeMobileMenu();
+                const url =
+                    button.getAttribute(
+                        "href"
+                    );
 
-        }
+
+                /*
+                   Prevent empty links.
+                */
+
+                if (
+                    !url ||
+                    url === "#"
+                ) {
+
+                    event.preventDefault();
+
+                    const card =
+                        button.closest(
+                            ".toy-card"
+                        );
+
+
+                    const name =
+                        card?.querySelector(
+                            "h3"
+                        )?.textContent.trim()
+                        || "Unknown Product";
+
+
+                    console.warn(
+                        "KiddoPlay: Add affiliate URL for:",
+                        name
+                    );
+
+                    return;
+
+                }
+
+
+                const card =
+                    button.closest(
+                        ".toy-card"
+                    );
+
+
+                if (!card) return;
+
+
+                const productName =
+                    card.querySelector(
+                        "h3"
+                    )?.textContent.trim()
+                    || "Unknown Product";
+
+
+                const category =
+                    card.querySelector(
+                        ".product-category"
+                    )?.textContent.trim()
+                    || "Unknown";
+
+
+                console.log(
+                    "Affiliate Product:",
+                    productName
+                );
+
+                console.log(
+                    "Category:",
+                    category
+                );
+
+
+                /*
+                   Google Analytics 4
+                */
+
+                if (
+                    typeof window.gtag ===
+                    "function"
+                ) {
+
+                    window.gtag(
+                        "event",
+                        "affiliate_product_click",
+                        {
+                            product_name:
+                                productName,
+
+                            category:
+                                category,
+
+                            destination:
+                                url
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+    });
+
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ===================================================== */
+
+    const revealElements =
+        document.querySelectorAll(
+            ".toy-card, " +
+            ".category-card, " +
+            ".why-card, " +
+            ".affiliate-notice, " +
+            ".store-card"
+        );
+
+
+    if (
+        "IntersectionObserver" in window
+    ) {
+
+        const observer =
+            new IntersectionObserver(
+                (entries, observerObject) => {
+
+                    entries.forEach(
+                        (entry) => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target.classList.add(
+                                    "revealed"
+                                );
+
+
+                                observerObject.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: 0.08
+                }
+            );
+
+
+        revealElements.forEach(
+            (element) => {
+
+                element.classList.add(
+                    "reveal-element"
+                );
+
+                observer.observe(
+                    element
+                );
+
+            }
+        );
+
+    } else {
+
+        /*
+           Fallback for older browsers.
+        */
+
+        revealElements.forEach(
+            (element) => {
+
+                element.classList.add(
+                    "revealed"
+                );
+
+            }
+        );
 
     }
-);
 
 
-/* =========================================================
-   CURRENT YEAR
-========================================================= */
 
-const copyright =
-    document.querySelector(".copyright");
+    /* =====================================================
+       ESC KEY
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeMenu();
+
+            }
+
+        }
+    );
 
 
-if (copyright) {
 
-    copyright.textContent =
-        "© " +
-        new Date().getFullYear() +
-        " KiddoPlay. All rights reserved.";
+    /* =====================================================
+       CURRENT YEAR
+    ===================================================== */
 
-}
+    const copyright =
+        document.querySelector(
+            ".copyright"
+        );
 
 
-/* =========================================================
-   INITIALIZE
-========================================================= */
+    if (copyright) {
 
-function initializeKiddoPlay() {
+        copyright.textContent =
+            `© ${new Date().getFullYear()} KiddoPlay. All rights reserved.`;
 
-    /*
-       Show all toys initially.
-    */
+    }
+
+
+
+    /* =====================================================
+       INITIAL FILTER
+    ===================================================== */
 
     filterToys("all");
 
 
-    /*
-       Make first filter active.
-    */
+    filterButtons.forEach(
+        (button) => {
 
-    filterButtons.forEach((button) => {
+            button.classList.toggle(
+                "active",
+                button.dataset.filter === "all"
+            );
 
-        button.classList.toggle(
-            "active",
-            button.dataset.filter === "all"
-        );
-
-    });
-
-
-    console.log(
-        "KiddoPlay loaded successfully."
+        }
     );
 
+
+    /* =====================================================
+       CONSOLE STATUS
+    ===================================================== */
+
     console.log(
-        "Affiliate store tracking active."
+        "KiddoPlay JS initialized successfully."
     );
 
     console.log(
-        "Registered affiliate stores:",
-        Object.keys(affiliateStores).length
+        `Affiliate stores detected: ${storeCards.length}`
     );
 
-}
-
-
-if (
-    document.readyState === "loading"
-) {
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        initializeKiddoPlay
-    );
-
-} else {
-
-    initializeKiddoPlay();
-
-}
+});
 ```
+   
+   
+  
