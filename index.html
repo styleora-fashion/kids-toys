@@ -1,61 +1,64 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<meta name="description" content="Kids Toys - Discover fun, educational and trending toys for children.">
+    <meta name="description" content="Discover the best educational, creative, soft and vehicle toys for kids. Compare fun kids toys and find your favorites.">
 
-<title>KiddoPlay | Fun Toys for Every Child</title>
+    <meta name="keywords" content="kids toys, educational toys, toys for kids, learning toys, creative toys, soft toys, kids gifts">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>KiddoPlay | Best Kids Toys, Learning & Fun</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="stylesheet" href="style.css">
-```
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<!-- ================= NAVBAR ================= -->
+
 <header class="navbar">
+
     <div class="nav-container">
 
-```
-    <a href="#home" class="logo">
-        KIDDO<span>PLAY</span>
-    </a>
+        <a href="#home" class="logo">
+            KIDDO<span>PLAY</span>
+        </a>
 
-    <nav class="nav-links" id="navLinks">
-        <a href="#home">Home</a>
-        <a href="#toys">Toys</a>
-        <a href="#categories">Categories</a>
-        <a href="#about">About</a>
-    </nav>
+        <nav class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#toys">Toys</a>
+            <a href="#categories">Categories</a>
+            <a href="#deals">Deals</a>
+            <a href="#about">About</a>
+        </nav>
 
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu">
-        ☰
-    </button>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+            ☰
+        </button>
 
-</div>
-```
+    </div>
 
 </header>
 
+
 <main>
 
-```
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 
 <section class="hero" id="home">
 
     <div class="hero-content">
 
-        <span class="hero-label">🧸 FUN • PLAY • LEARN</span>
+        <span class="hero-label">
+            🧸 FUN • PLAY • LEARN
+        </span>
 
         <h1>
             Big Fun for
@@ -63,17 +66,62 @@
         </h1>
 
         <p>
-            Discover colorful, creative and educational toys
-            made to bring more fun into every child's day.
+            Discover fun, creative and educational toys
+            that make playtime more exciting and learning
+            more enjoyable.
         </p>
 
-        <a href="#toys" class="main-btn">
-            Explore Toys →
-        </a>
+        <div class="hero-buttons">
+
+            <a href="#toys" class="main-btn">
+                Explore Toys →
+            </a>
+
+            <a href="#categories" class="secondary-btn">
+                Browse Categories
+            </a>
+
+        </div>
+
+        <div class="hero-trust">
+
+            <div>
+                <strong>50+</strong>
+                <span>Toys</span>
+            </div>
+
+            <div>
+                <strong>4</strong>
+                <span>Categories</span>
+            </div>
+
+            <div>
+                <strong>100%</strong>
+                <span>Fun</span>
+            </div>
+
+        </div>
 
     </div>
 
+
     <div class="hero-image">
+
+        <div class="hero-toy toy-ball">
+            ⚽
+        </div>
+
+        <div class="hero-toy toy-bear">
+            🧸
+        </div>
+
+        <div class="hero-toy toy-car">
+            🚗
+        </div>
+
+        <div class="hero-toy toy-block">
+            🧱
+        </div>
 
         <div class="hero-card">
             <strong>50+</strong>
@@ -85,18 +133,43 @@
 </section>
 
 
-<!-- TOYS -->
+<!-- ================= AFFILIATE DISCLOSURE ================= -->
+
+<section class="affiliate-notice">
+
+    <div class="affiliate-icon">
+        💡
+    </div>
+
+    <div>
+        <strong>Affiliate Disclosure</strong>
+
+        <p>
+            Some links on KiddoPlay are affiliate links. If you
+            purchase through one of our links, we may earn a small
+            commission at no extra cost to you.
+        </p>
+    </div>
+
+</section>
+
+
+<!-- ================= TOYS ================= -->
 
 <section class="toys-section" id="toys">
 
     <div class="section-heading">
 
         <div>
-            <span class="section-label">OUR COLLECTION</span>
+
+            <span class="section-label">
+                OUR COLLECTION
+            </span>
 
             <h2>
                 Find Your <span>Favorite Toy</span>
             </h2>
+
         </div>
 
         <p>
@@ -134,31 +207,56 @@
     </div>
 
 
-    <!-- TOY GRID -->
+    <!-- ================= TOY GRID ================= -->
 
     <div class="toy-grid" id="toyGrid">
 
 
-        <!-- TOY 1 -->
+        <!-- PRODUCT 1 -->
 
         <article class="toy-card" data-category="educational">
 
             <div class="toy-image toy-1">
                 🧩
+
+                <span class="product-badge">
+                    POPULAR
+                </span>
             </div>
 
             <div class="toy-content">
 
-                <span>EDUCATIONAL</span>
+                <span class="product-category">
+                    EDUCATIONAL
+                </span>
 
-                <h3>Learning Puzzle</h3>
+                <h3>
+                    Learning Puzzle
+                </h3>
 
                 <p>
-                    Fun puzzle designed to encourage
-                    problem-solving and creativity.
+                    A fun puzzle designed to encourage
+                    problem-solving, focus and creativity.
                 </p>
 
-                <a href="#" class="toy-btn">
+                <div class="product-meta">
+
+                    <span class="rating">
+                        ⭐ 4.8
+                    </span>
+
+                    <span class="age">
+                        Ages 3+
+                    </span>
+
+                </div>
+
+                <!-- REPLACE # WITH YOUR AFFILIATE LINK -->
+
+                <a href="#" 
+                   class="toy-btn"
+                   target="_blank"
+                   rel="nofollow sponsored noopener">
                     View Toy →
                 </a>
 
@@ -167,26 +265,51 @@
         </article>
 
 
-        <!-- TOY 2 -->
+        <!-- PRODUCT 2 -->
 
         <article class="toy-card" data-category="vehicles">
 
             <div class="toy-image toy-2">
+
                 🚗
+
+                <span class="product-badge blue">
+                    BEST SELLER
+                </span>
+
             </div>
 
             <div class="toy-content">
 
-                <span>VEHICLES</span>
+                <span class="product-category">
+                    VEHICLES
+                </span>
 
-                <h3>Mini Racing Car</h3>
+                <h3>
+                    Mini Racing Car
+                </h3>
 
                 <p>
-                    Colorful racing car for exciting
+                    A colorful racing car for exciting
                     indoor and outdoor play.
                 </p>
 
-                <a href="#" class="toy-btn">
+                <div class="product-meta">
+
+                    <span class="rating">
+                        ⭐ 4.7
+                    </span>
+
+                    <span class="age">
+                        Ages 3+
+                    </span>
+
+                </div>
+
+                <a href="#"
+                   class="toy-btn"
+                   target="_blank"
+                   rel="nofollow sponsored noopener">
                     View Toy →
                 </a>
 
@@ -195,26 +318,47 @@
         </article>
 
 
-        <!-- TOY 3 -->
+        <!-- PRODUCT 3 -->
 
         <article class="toy-card" data-category="soft">
 
             <div class="toy-image toy-3">
+
                 🧸
+
             </div>
 
             <div class="toy-content">
 
-                <span>SOFT TOYS</span>
+                <span class="product-category">
+                    SOFT TOYS
+                </span>
 
-                <h3>Classic Teddy Bear</h3>
+                <h3>
+                    Classic Teddy Bear
+                </h3>
 
                 <p>
-                    A soft and cuddly teddy bear
-                    perfect for little ones.
+                    A soft and cuddly teddy bear perfect
+                    for little ones and imaginative play.
                 </p>
 
-                <a href="#" class="toy-btn">
+                <div class="product-meta">
+
+                    <span class="rating">
+                        ⭐ 4.9
+                    </span>
+
+                    <span class="age">
+                        Ages 2+
+                    </span>
+
+                </div>
+
+                <a href="#"
+                   class="toy-btn"
+                   target="_blank"
+                   rel="nofollow sponsored noopener">
                     View Toy →
                 </a>
 
@@ -223,26 +367,51 @@
         </article>
 
 
-        <!-- TOY 4 -->
+        <!-- PRODUCT 4 -->
 
         <article class="toy-card" data-category="creative">
 
             <div class="toy-image toy-4">
+
                 🎨
+
+                <span class="product-badge green">
+                    CREATIVE PICK
+                </span>
+
             </div>
 
             <div class="toy-content">
 
-                <span>CREATIVE</span>
+                <span class="product-category">
+                    CREATIVE
+                </span>
 
-                <h3>Art & Color Set</h3>
+                <h3>
+                    Art & Color Set
+                </h3>
 
                 <p>
-                    A creative art set for drawing,
-                    coloring and imagination.
+                    A creative art set for drawing, coloring
+                    and developing imagination.
                 </p>
 
-                <a href="#" class="toy-btn">
+                <div class="product-meta">
+
+                    <span class="rating">
+                        ⭐ 4.8
+                    </span>
+
+                    <span class="age">
+                        Ages 4+
+                    </span>
+
+                </div>
+
+                <a href="#"
+                   class="toy-btn"
+                   target="_blank"
+                   rel="nofollow sponsored noopener">
                     View Toy →
                 </a>
 
@@ -251,26 +420,47 @@
         </article>
 
 
-        <!-- TOY 5 -->
+        <!-- PRODUCT 5 -->
 
         <article class="toy-card" data-category="vehicles">
 
             <div class="toy-image toy-5">
+
                 🚂
+
             </div>
 
             <div class="toy-content">
 
-                <span>VEHICLES</span>
+                <span class="product-category">
+                    VEHICLES
+                </span>
 
-                <h3>Little Train Set</h3>
+                <h3>
+                    Little Train Set
+                </h3>
 
                 <p>
                     Build tracks and create exciting
-                    railway adventures.
+                    railway adventures at home.
                 </p>
 
-                <a href="#" class="toy-btn">
+                <div class="product-meta">
+
+                    <span class="rating">
+                        ⭐ 4.6
+                    </span>
+
+                    <span class="age">
+                        Ages 3+
+                    </span>
+
+                </div>
+
+                <a href="#"
+                   class="toy-btn"
+                   target="_blank"
+                   rel="nofollow sponsored noopener">
                     View Toy →
                 </a>
 
@@ -279,26 +469,47 @@
         </article>
 
 
-        <!-- TOY 6 -->
+        <!-- PRODUCT 6 -->
 
         <article class="toy-card" data-category="educational">
 
             <div class="toy-image toy-6">
+
                 🔢
+
             </div>
 
             <div class="toy-content">
 
-                <span>EDUCATIONAL</span>
+                <span class="product-category">
+                    EDUCATIONAL
+                </span>
 
-                <h3>Learning Numbers</h3>
+                <h3>
+                    Learning Numbers
+                </h3>
 
                 <p>
-                    A playful way for children to
-                    practice numbers and counting.
+                    A playful way for children to practice
+                    numbers, counting and early math skills.
                 </p>
 
-                <a href="#" class="toy-btn">
+                <div class="product-meta">
+
+                    <span class="rating">
+                        ⭐ 4.7
+                    </span>
+
+                    <span class="age">
+                        Ages 3+
+                    </span>
+
+                </div>
+
+                <a href="#"
+                   class="toy-btn"
+                   target="_blank"
+                   rel="nofollow sponsored noopener">
                     View Toy →
                 </a>
 
@@ -307,26 +518,47 @@
         </article>
 
 
-        <!-- TOY 7 -->
+        <!-- PRODUCT 7 -->
 
         <article class="toy-card" data-category="soft">
 
             <div class="toy-image toy-7">
+
                 🐰
+
             </div>
 
             <div class="toy-content">
 
-                <span>SOFT TOYS</span>
+                <span class="product-category">
+                    SOFT TOYS
+                </span>
 
-                <h3>Fluffy Bunny</h3>
+                <h3>
+                    Fluffy Bunny
+                </h3>
 
                 <p>
-                    Cute and soft bunny toy for
-                    comfort and imaginative play.
+                    A cute and soft bunny toy for comfort
+                    and imaginative play.
                 </p>
 
-                <a href="#" class="toy-btn">
+                <div class="product-meta">
+
+                    <span class="rating">
+                        ⭐ 4.8
+                    </span>
+
+                    <span class="age">
+                        Ages 2+
+                    </span>
+
+                </div>
+
+                <a href="#"
+                   class="toy-btn"
+                   target="_blank"
+                   rel="nofollow sponsored noopener">
                     View Toy →
                 </a>
 
@@ -335,26 +567,51 @@
         </article>
 
 
-        <!-- TOY 8 -->
+        <!-- PRODUCT 8 -->
 
         <article class="toy-card" data-category="creative">
 
             <div class="toy-image toy-8">
+
                 🧱
+
+                <span class="product-badge purple">
+                    KIDS PICK
+                </span>
+
             </div>
 
             <div class="toy-content">
 
-                <span>CREATIVE</span>
+                <span class="product-category">
+                    CREATIVE
+                </span>
 
-                <h3>Building Blocks</h3>
+                <h3>
+                    Building Blocks
+                </h3>
 
                 <p>
-                    Colorful building blocks that
-                    encourage imagination and design.
+                    Colorful building blocks that encourage
+                    imagination, design and creativity.
                 </p>
 
-                <a href="#" class="toy-btn">
+                <div class="product-meta">
+
+                    <span class="rating">
+                        ⭐ 4.9
+                    </span>
+
+                    <span class="age">
+                        Ages 3+
+                    </span>
+
+                </div>
+
+                <a href="#"
+                   class="toy-btn"
+                   target="_blank"
+                   rel="nofollow sponsored noopener">
                     View Toy →
                 </a>
 
@@ -363,6 +620,7 @@
         </article>
 
     </div>
+
 
     <div id="noResults" class="no-results">
         No toys found in this category.
@@ -371,59 +629,110 @@
 </section>
 
 
-<!-- CATEGORIES -->
+<!-- ================= CATEGORIES ================= -->
 
 <section class="categories" id="categories">
 
     <div class="category-heading">
 
-        <span class="section-label">EXPLORE</span>
+        <span class="section-label">
+            EXPLORE
+        </span>
 
         <h2>
             Shop by <span>Category</span>
         </h2>
+
+        <p>
+            Find the right type of toy for every
+            child's interests and imagination.
+        </p>
 
     </div>
 
 
     <div class="category-grid">
 
-        <a href="#toys" class="category-card educational-category"
+        <a href="#toys"
+           class="category-card educational-category"
            data-category-link="educational">
 
             <strong>01</strong>
-            <h3>Educational</h3>
-            <p>Learn while having fun →</p>
+
+            <div class="category-icon">
+                🧠
+            </div>
+
+            <h3>
+                Educational
+            </h3>
+
+            <p>
+                Learn while having fun →
+            </p>
 
         </a>
 
 
-        <a href="#toys" class="category-card vehicle-category"
+        <a href="#toys"
+           class="category-card vehicle-category"
            data-category-link="vehicles">
 
             <strong>02</strong>
-            <h3>Vehicles</h3>
-            <p>Cars, trains & more →</p>
+
+            <div class="category-icon">
+                🚗
+            </div>
+
+            <h3>
+                Vehicles
+            </h3>
+
+            <p>
+                Cars, trains & more →
+            </p>
 
         </a>
 
 
-        <a href="#toys" class="category-card soft-category"
+        <a href="#toys"
+           class="category-card soft-category"
            data-category-link="soft">
 
             <strong>03</strong>
-            <h3>Soft Toys</h3>
-            <p>Meet cute friends →</p>
+
+            <div class="category-icon">
+                🧸
+            </div>
+
+            <h3>
+                Soft Toys
+            </h3>
+
+            <p>
+                Meet cute friends →
+            </p>
 
         </a>
 
 
-        <a href="#toys" class="category-card creative-category"
+        <a href="#toys"
+           class="category-card creative-category"
            data-category-link="creative">
 
             <strong>04</strong>
-            <h3>Creative</h3>
-            <p>Create something amazing →</p>
+
+            <div class="category-icon">
+                🎨
+            </div>
+
+            <h3>
+                Creative
+            </h3>
+
+            <p>
+                Create something amazing →
+            </p>
 
         </a>
 
@@ -432,11 +741,142 @@
 </section>
 
 
-<!-- ABOUT -->
+<!-- ================= WHY KIDDOPLAY ================= -->
+
+<section class="why-section">
+
+    <div class="section-heading centered">
+
+        <span class="section-label">
+            WHY KIDDOPLAY?
+        </span>
+
+        <h2>
+            Making Toy Discovery <span>Easy</span>
+        </h2>
+
+        <p>
+            We help parents discover interesting toys
+            without making the search complicated.
+        </p>
+
+    </div>
+
+
+    <div class="why-grid">
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                🔎
+            </div>
+
+            <h3>
+                Easy Discovery
+            </h3>
+
+            <p>
+                Browse different toy categories
+                in one simple place.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                🧠
+            </div>
+
+            <h3>
+                Learning Focus
+            </h3>
+
+            <p>
+                Discover toys that combine
+                play, creativity and learning.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                ❤️
+            </div>
+
+            <h3>
+                Kid-Friendly Picks
+            </h3>
+
+            <p>
+                Explore fun ideas suitable for
+                different interests and ages.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURED DEALS ================= -->
+
+<section class="deals-section" id="deals">
+
+    <div class="deal-content">
+
+        <span class="section-label">
+            FIND YOUR NEXT FAVORITE
+        </span>
+
+        <h2>
+            Ready for
+            <span>More Fun?</span>
+        </h2>
+
+        <p>
+            Explore our recommended toy collection
+            and discover something special for your
+            little one.
+        </p>
+
+        <a href="#toys" class="main-btn">
+            Browse All Toys →
+        </a>
+
+    </div>
+
+
+    <div class="deal-visual">
+
+        <div class="deal-circle circle-one">
+            ⭐
+        </div>
+
+        <div class="deal-circle circle-two">
+            🎁
+        </div>
+
+        <div class="deal-circle circle-three">
+            🧸
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
 
 <section class="about" id="about">
 
-    <span class="section-label">ABOUT KIDDOPLAY</span>
+    <span class="section-label">
+        ABOUT KIDDOPLAY
+    </span>
 
     <h2>
         Play More.
@@ -444,9 +884,11 @@
     </h2>
 
     <p>
-        KiddoPlay is a student-built toy discovery project
-        designed to help parents and children explore fun,
-        creative and educational toys in one simple place.
+        KiddoPlay is a toy discovery website created to
+        help parents explore fun, creative and educational
+        toys in one simple place. We highlight different
+        products and direct visitors to external stores
+        where they can learn more or make a purchase.
     </p>
 
     <a href="#toys" class="main-btn">
@@ -454,48 +896,102 @@
     </a>
 
 </section>
-```
 
-</main>
 
-<!-- FOOTER -->
+<!-- ================= FINAL CTA ================= -->
 
-<footer>
-
-```
-<div class="footer-top">
+<section class="final-cta">
 
     <div>
 
-        <a href="#home" class="logo">
-            KIDDO<span>PLAY</span>
-        </a>
+        <span>
+            🎁 MAKE PLAYTIME SPECIAL
+        </span>
+
+        <h2>
+            Find Something
+            <strong>They'll Love.</strong>
+        </h2>
 
         <p>
-            Big fun for little minds.
+            Explore our collection of fun and
+            creative kids toys.
         </p>
 
     </div>
 
-    <div class="footer-links">
+    <a href="#toys" class="main-btn white-btn">
+        Start Exploring →
+    </a>
 
-        <a href="#home">Home</a>
-        <a href="#toys">Toys</a>
-        <a href="#categories">Categories</a>
-        <a href="#about">About</a>
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-top">
+
+        <div>
+
+            <a href="#home" class="logo">
+                KIDDO<span>PLAY</span>
+            </a>
+
+            <p>
+                Big fun for little minds.
+            </p>
+
+            <small>
+                Affiliate links may earn us a commission
+                at no additional cost to you.
+            </small>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#toys">
+                Toys
+            </a>
+
+            <a href="#categories">
+                Categories
+            </a>
+
+            <a href="#deals">
+                Deals
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+        </div>
 
     </div>
 
-</div>
 
-<div class="copyright">
-    © 2026 KiddoPlay. All rights reserved.
-</div>
-```
+    <div class="copyright">
+
+        © 2026 KiddoPlay.
+        All rights reserved.
+
+    </div>
 
 </footer>
+
 
 <script src="script.js"></script>
 
 </body>
 </html>
+```
