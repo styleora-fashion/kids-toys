@@ -1,11 +1,10 @@
 ```javascript
-/* =========================================================
-   KIDDOPLAY
-   MAIN JAVASCRIPT
-   Version: 2026
-========================================================= */
-
 "use strict";
+
+/* =========================================================
+   KIDDOPLAY - MAIN JAVASCRIPT
+   Compatible with the supplied KiddoPlay HTML
+========================================================= */
 
 
 /* =========================================================
@@ -27,16 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const toyCards =
         document.querySelectorAll(".toy-card");
 
-    const noResults =
-        document.getElementById("noResults");
-
     const categoryCards =
         document.querySelectorAll(".category-card");
 
-    const toysNavLink =
-        document.querySelector(
-            '.nav-links a[href="#toys"]'
-        );
+    const noResults =
+        document.getElementById("noResults");
+
+    const productButtons =
+        document.querySelectorAll(".toy-card .toy-btn");
 
     const copyright =
         document.querySelector(".copyright");
@@ -48,59 +45,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function closeMobileMenu() {
 
-        if (!navLinks) return;
+        if (!navLinks || !menuBtn) {
+            return;
+        }
 
         navLinks.classList.remove("active");
 
-        if (menuBtn) {
+        menuBtn.textContent = "☰";
 
-            menuBtn.textContent = "☰";
+        menuBtn.setAttribute(
+            "aria-label",
+            "Open menu"
+        );
 
-            menuBtn.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-            menuBtn.setAttribute(
-                "aria-label",
-                "Open menu"
-            );
-
-        }
-
+        menuBtn.setAttribute(
+            "aria-expanded",
+            "false"
+        );
     }
 
 
     function toggleMobileMenu() {
 
-        if (!navLinks) return;
+        if (!navLinks || !menuBtn) {
+            return;
+        }
 
         const isOpen =
             navLinks.classList.toggle("active");
 
-        if (menuBtn) {
+        menuBtn.textContent =
+            isOpen ? "✕" : "☰";
 
-            menuBtn.textContent =
-                isOpen ? "✕" : "☰";
+        menuBtn.setAttribute(
+            "aria-label",
+            isOpen ? "Close menu" : "Open menu"
+        );
 
-            menuBtn.setAttribute(
-                "aria-expanded",
-                isOpen ? "true" : "false"
-            );
-
-            menuBtn.setAttribute(
-                "aria-label",
-                isOpen
-                    ? "Close menu"
-                    : "Open menu"
-            );
-
-        }
-
+        menuBtn.setAttribute(
+            "aria-expanded",
+            isOpen ? "true" : "false"
+        );
     }
 
 
-    if (menuBtn) {
+    if (menuBtn && navLinks) {
 
         menuBtn.addEventListener(
             "click",
@@ -110,102 +99,74 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* Close menu when navigation link is clicked */
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
 
-    document
-        .querySelectorAll(".nav-links a")
-        .forEach((link) => {
+    const navItems =
+        document.querySelectorAll(".nav-links a");
 
-            link.addEventListener(
-                "click",
-                closeMobileMenu
-            );
+    navItems.forEach((link) => {
+
+        link.addEventListener("click", () => {
+
+            closeMobileMenu();
 
         });
 
-
-    /* Close menu with Escape */
-
-    document.addEventListener(
-        "keydown",
-        (event) => {
-
-            if (
-                event.key === "Escape" &&
-                navLinks &&
-                navLinks.classList.contains("active")
-            ) {
-
-                closeMobileMenu();
-
-            }
-
-        }
-    );
+    });
 
 
     /* =====================================================
        TOY FILTER SYSTEM
     ===================================================== */
 
-    function showToy(card) {
-
-        card.style.display = "";
-
-        /*
-         * Force browser to notice the animation
-         */
-
-        card.classList.remove("filter-show");
-
-        void card.offsetWidth;
-
-        card.classList.add("filter-show");
-
-    }
-
-
-    function hideToy(card) {
-
-        card.classList.remove("filter-show");
-
-        card.style.display = "none";
-
-    }
-
-
-    function filterToys(selectedFilter = "all") {
+    function filterToys(filter) {
 
         let visibleToys = 0;
 
         toyCards.forEach((card) => {
 
             const category =
-                card.dataset.category || "";
+                card.dataset.category;
 
             const shouldShow =
-                selectedFilter === "all" ||
-                category === selectedFilter;
-
+                filter === "all" ||
+                category === filter;
 
             if (shouldShow) {
 
-                showToy(card);
+                card.style.display = "";
 
                 visibleToys++;
 
+                /*
+                   Restart animation
+                */
+
+                card.classList.remove("filter-show");
+
+                /*
+                   Force browser reflow
+                   so animation can restart
+                */
+
+                void card.offsetWidth;
+
+                card.classList.add("filter-show");
+
             } else {
 
-                hideToy(card);
+                card.style.display = "none";
+
+                card.classList.remove("filter-show");
 
             }
 
         });
 
 
-        /* ---------------------------------------------
-           NO RESULTS MESSAGE
-        --------------------------------------------- */
+        /* No results message */
 
         if (noResults) {
 
@@ -229,35 +190,27 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             () => {
 
-                const selectedFilter =
-                    button.dataset.filter || "all";
-
-
-                /* Active button */
-
                 filterButtons.forEach((btn) => {
 
                     btn.classList.remove("active");
-
-                    btn.setAttribute(
-                        "aria-pressed",
-                        "false"
-                    );
 
                 });
 
 
                 button.classList.add("active");
 
-                button.setAttribute(
-                    "aria-pressed",
-                    "true"
-                );
+
+                const selectedFilter =
+                    button.dataset.filter;
 
 
-                /* Filter products */
+                if (selectedFilter) {
 
-                filterToys(selectedFilter);
+                    filterToys(
+                        selectedFilter
+                    );
+
+                }
 
             }
         );
@@ -273,12 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         categoryCard.addEventListener(
             "click",
-            (event) => {
-
-                /*
-                 * Prevent accidental double navigation
-                 * from nested elements.
-                 */
+            () => {
 
                 const selectedCategory =
                     categoryCard.dataset.categoryLink;
@@ -295,36 +243,25 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
-                if (!matchingButton) {
-                    return;
-                }
+                if (matchingButton) {
 
+                    matchingButton.click();
 
-                /*
-                 * Activate category filter
-                 */
+                    /*
+                       Scroll user back to toys section
+                    */
 
-                matchingButton.click();
+                    const toysSection =
+                        document.getElementById("toys");
 
-
-                /*
-                 * Scroll to toys section
-                 */
-
-                const toysSection =
-                    document.getElementById("toys");
-
-
-                if (toysSection) {
-
-                    setTimeout(() => {
+                    if (toysSection) {
 
                         toysSection.scrollIntoView({
                             behavior: "smooth",
                             block: "start"
                         });
 
-                    }, 50);
+                    }
 
                 }
 
@@ -335,9 +272,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       TOYS NAVIGATION
-       Reset filter to ALL
+       TOYS NAV LINK
     ===================================================== */
+
+    const toysNavLink =
+        document.querySelector(
+            '.nav-links a[href="#toys"]'
+        );
+
 
     if (toysNavLink) {
 
@@ -367,123 +309,74 @@ document.addEventListener("DOMContentLoaded", () => {
        AFFILIATE LINKS
     ===================================================== */
 
-    const externalLinks =
+    const affiliateLinks =
         document.querySelectorAll(
-            'a[href^="http://"], a[href^="https://"]'
+            "a.affiliate-link"
         );
 
 
-    externalLinks.forEach((link) => {
-
-        /*
-         * Do not modify internal GitHub Pages links.
-         */
+    affiliateLinks.forEach((link) => {
 
         const href =
             link.getAttribute("href");
 
 
-        if (!href) return;
+        /*
+           Only modify valid external URLs.
+        */
 
+        if (
+            href &&
+            (
+                href.startsWith("https://") ||
+                href.startsWith("http://")
+            )
+        ) {
 
-        try {
+            link.setAttribute(
+                "target",
+                "_blank"
+            );
 
-            const url =
-                new URL(href);
-
-            const currentHost =
-                window.location.hostname;
-
-
-            /*
-             * External website
-             */
-
-            if (
-                url.hostname !== currentHost
-            ) {
-
-                link.setAttribute(
-                    "target",
-                    "_blank"
-                );
-
-                link.setAttribute(
-                    "rel",
-                    "nofollow sponsored noopener"
-                );
-
-            }
-
-        } catch (error) {
-
-            console.warn(
-                "Invalid external URL:",
-                href
+            link.setAttribute(
+                "rel",
+                "nofollow sponsored noopener"
             );
 
         }
 
-    });
 
+        /*
+           Track affiliate click
+        */
 
-    /* =====================================================
-       PRODUCT CLICK TRACKING
-    ===================================================== */
-
-    const productButtons =
-        document.querySelectorAll(
-            ".toy-card .toy-btn"
-        );
-
-
-    productButtons.forEach((button) => {
-
-        button.addEventListener(
+        link.addEventListener(
             "click",
             () => {
 
-                const card =
-                    button.closest(".toy-card");
-
-
-                if (!card) return;
-
-
-                const productName =
-                    card.querySelector("h3");
-
-
-                const category =
-                    card.dataset.category || "";
-
+                const store =
+                    link.dataset.store ||
+                    "Unknown Store";
 
                 const product =
-                    productName
-                        ? productName.textContent.trim()
-                        : "Unknown product";
+                    link.dataset.product ||
+                    "Unknown Product";
 
-
-                /*
-                 * Console tracking
-                 */
 
                 console.log(
-                    "KiddoPlay affiliate click:",
+                    "Affiliate Click",
                     {
+                        store: store,
                         product: product,
-                        category: category,
-                        url: button.href
+                        url: href
                     }
                 );
 
 
                 /*
-                 * Google Analytics support
-                 *
-                 * If GA4 is installed, this event
-                 * will automatically be sent.
-                 */
+                   Optional Google Analytics support.
+                   Works only if gtag exists.
+                */
 
                 if (
                     typeof window.gtag === "function"
@@ -493,9 +386,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         "event",
                         "affiliate_click",
                         {
-                            product_name: product,
-                            product_category: category,
-                            destination: button.href
+                            store: store,
+                            product: product
                         }
                     );
 
@@ -508,48 +400,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       STORE CLICK TRACKING
+       PREVENT EMPTY PRODUCT LINKS
     ===================================================== */
 
-    const storeLinks =
-        document.querySelectorAll(
-            ".store-card"
-        );
+    productButtons.forEach((button) => {
 
-
-    storeLinks.forEach((store) => {
-
-        store.addEventListener(
+        button.addEventListener(
             "click",
-            () => {
+            (event) => {
 
-                const storeName =
-                    store.querySelector("h3");
-
-
-                const name =
-                    storeName
-                        ? storeName.textContent.trim()
-                        : "Unknown store";
-
-
-                console.log(
-                    "KiddoPlay store click:",
-                    name
-                );
+                const href =
+                    button.getAttribute("href");
 
 
                 if (
-                    typeof window.gtag === "function"
+                    !href ||
+                    href === "#"
                 ) {
 
-                    window.gtag(
-                        "event",
-                        "store_click",
-                        {
-                            store_name: name,
-                            destination: store.href
-                        }
+                    event.preventDefault();
+
+                    console.warn(
+                        "Affiliate URL is missing:",
+                        button
                     );
 
                 }
@@ -566,19 +439,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const revealElements =
         document.querySelectorAll(
-            ".toy-card, " +
-            ".category-card, " +
-            ".why-card, " +
-            ".store-card, " +
-            ".affiliate-notice, " +
-            ".deals-section, " +
-            ".about"
+            ".toy-card, .category-card, .why-card, .affiliate-notice, .store-card"
         );
 
 
     if (
         "IntersectionObserver" in window &&
-        revealElements.length
+        revealElements.length > 0
     ) {
 
         const observer =
@@ -595,7 +462,6 @@ document.addEventListener("DOMContentLoaded", () => {
                                 "revealed"
                             );
 
-
                             observerInstance.unobserve(
                                 entry.target
                             );
@@ -606,8 +472,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 },
                 {
-                    threshold: 0.08,
-                    rootMargin: "0px 0px -30px 0px"
+                    threshold: 0.08
                 }
             );
 
@@ -625,8 +490,8 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
 
         /*
-         * Fallback for old browsers
-         */
+           Fallback for older browsers
+        */
 
         revealElements.forEach((element) => {
 
@@ -640,81 +505,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       SMOOTH SCROLL FOR INTERNAL LINKS
+       ESC KEY
     ===================================================== */
 
-    document
-        .querySelectorAll('a[href^="#"]')
-        .forEach((link) => {
+    document.addEventListener(
+        "keydown",
+        (event) => {
 
-            link.addEventListener(
-                "click",
-                (event) => {
+            if (event.key === "Escape") {
 
-                    const targetId =
-                        link.getAttribute("href");
+                closeMobileMenu();
 
+            }
 
-                    if (
-                        !targetId ||
-                        targetId === "#"
-                    ) {
-                        return;
-                    }
+        }
+    );
 
 
-                    const target =
-                        document.querySelector(
-                            targetId
-                        );
+    /* =====================================================
+       CLOSE MENU WHEN CLICKING OUTSIDE
+    ===================================================== */
+
+    document.addEventListener(
+        "click",
+        (event) => {
+
+            if (
+                !navLinks ||
+                !menuBtn ||
+                !navLinks.classList.contains("active")
+            ) {
+                return;
+            }
 
 
-                    if (!target) {
-                        return;
-                    }
+            const clickedInsideMenu =
+                navLinks.contains(event.target);
+
+            const clickedMenuButton =
+                menuBtn.contains(event.target);
 
 
-                    event.preventDefault();
+            if (
+                !clickedInsideMenu &&
+                !clickedMenuButton
+            ) {
 
+                closeMobileMenu();
 
-                    const navbar =
-                        document.querySelector(
-                            ".navbar"
-                        );
+            }
 
-
-                    const navbarHeight =
-                        navbar
-                            ? navbar.offsetHeight
-                            : 0;
-
-
-                    const targetPosition =
-                        target.getBoundingClientRect().top +
-                        window.scrollY -
-                        navbarHeight;
-
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: "smooth"
-                    });
-
-
-                    /*
-                     * Update browser URL
-                     */
-
-                    history.replaceState(
-                        null,
-                        "",
-                        targetId
-                    );
-
-                }
-            );
-
-        });
+        }
+    );
 
 
     /* =====================================================
@@ -730,79 +572,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       INITIALIZE FILTERS
+       INITIAL FILTER
     ===================================================== */
 
-    filterButtons.forEach((button) => {
-
-        button.setAttribute(
-            "aria-pressed",
-            button.classList.contains("active")
-                ? "true"
-                : "false"
-        );
-
-    });
-
-
-    /*
-     * IMPORTANT:
-     * Initial state must NEVER show
-     * "No toys found".
-     */
-
-    if (toyCards.length) {
-
-        filterToys("all");
-
-    } else if (noResults) {
-
-        noResults.style.display = "none";
-
-    }
+    filterToys("all");
 
 
     /* =====================================================
-       RESIZE HANDLING
-    ===================================================== */
-
-    window.addEventListener(
-        "resize",
-        () => {
-
-            /*
-             * Close mobile menu when switching
-             * to desktop width.
-             */
-
-            if (
-                window.innerWidth > 700 &&
-                navLinks &&
-                navLinks.classList.contains("active")
-            ) {
-
-                closeMobileMenu();
-
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       PAGE LOAD COMPLETE
+       PAGE LOADED
     ===================================================== */
 
     console.log(
-        "KiddoPlay initialized successfully."
+        "KiddoPlay loaded successfully."
     );
 
     console.log(
-        `Products loaded: ${toyCards.length}`
-    );
-
-    console.log(
-        `Stores loaded: ${storeLinks.length}`
+        "Affiliate-ready product system active."
     );
 
 });
