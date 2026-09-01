@@ -1,53 +1,77 @@
 ```javascript
-/* =========================
-   KIDS TOYS - MAIN JS
-========================= */
+/* =========================================================
+   KIDDOPLAY - MAIN JAVASCRIPT
+   Affiliate Kids Toys Website
+========================================================= */
+
+"use strict";
 
 
-/* =========================
+/* =========================================================
    MOBILE MENU
-========================= */
+========================================================= */
 
 const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 
 if (menuBtn && navLinks) {
 
-    menuBtn.addEventListener("click", function () {
+    menuBtn.addEventListener("click", () => {
 
         navLinks.classList.toggle("active");
 
-        const isOpen = navLinks.classList.contains("active");
+        const isOpen =
+            navLinks.classList.contains("active");
 
         menuBtn.setAttribute(
             "aria-label",
             isOpen ? "Close menu" : "Open menu"
         );
 
+        menuBtn.setAttribute(
+            "aria-expanded",
+            isOpen ? "true" : "false"
+        );
+
+        /* Change hamburger icon */
+
+        menuBtn.textContent =
+            isOpen ? "✕" : "☰";
+
     });
 
 }
 
 
-/* =========================
-   CLOSE MENU AFTER CLICK
-========================= */
+/* =========================================================
+   CLOSE MOBILE MENU AFTER NAVIGATION
+========================================================= */
 
-const navItems = document.querySelectorAll(".nav-links a");
+const navItems =
+    document.querySelectorAll(".nav-links a");
 
-navItems.forEach(function (link) {
+navItems.forEach((link) => {
 
-    link.addEventListener("click", function () {
+    link.addEventListener("click", () => {
 
         if (navLinks) {
             navLinks.classList.remove("active");
         }
 
         if (menuBtn) {
+
+            menuBtn.textContent = "☰";
+
             menuBtn.setAttribute(
                 "aria-label",
                 "Open menu"
             );
+
+            menuBtn.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
         }
 
     });
@@ -55,9 +79,9 @@ navItems.forEach(function (link) {
 });
 
 
-/* =========================
-   TOY FILTER
-========================= */
+/* =========================================================
+   TOY FILTER SYSTEM
+========================================================= */
 
 const filterButtons =
     document.querySelectorAll(".filter-btn");
@@ -69,165 +93,319 @@ const noResults =
     document.getElementById("noResults");
 
 
-filterButtons.forEach(function (button) {
+function filterToys(filter) {
 
-    button.addEventListener("click", function () {
+    let visibleToys = 0;
 
-        /* Remove active state */
 
-        filterButtons.forEach(function (btn) {
+    toyCards.forEach((card) => {
+
+        const category =
+            card.dataset.category;
+
+
+        const shouldShow =
+            filter === "all" ||
+            category === filter;
+
+
+        if (shouldShow) {
+
+            card.style.display = "";
+
+            /* Small animation reset */
+
+            card.style.opacity = "0";
+            card.style.transform =
+                "translateY(12px)";
+
+            requestAnimationFrame(() => {
+
+                card.style.opacity = "1";
+                card.style.transform =
+                    "translateY(0)";
+
+            });
+
+            visibleToys++;
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+
+    /* No results */
+
+    if (noResults) {
+
+        noResults.style.display =
+            visibleToys === 0
+                ? "block"
+                : "none";
+
+    }
+
+}
+
+
+/* Filter button events */
+
+filterButtons.forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+        /* Remove active class */
+
+        filterButtons.forEach((btn) => {
 
             btn.classList.remove("active");
 
         });
 
 
-        /* Add active state */
+        /* Add active class */
 
         button.classList.add("active");
 
 
-        /* Get selected category */
-
-        const filter =
+        const selectedFilter =
             button.dataset.filter;
 
 
-        let visibleToys = 0;
-
-
-        /* Filter cards */
-
-        toyCards.forEach(function (card) {
-
-            const category =
-                card.dataset.category;
-
-
-            if (
-                filter === "all" ||
-                category === filter
-            ) {
-
-                card.style.display = "block";
-
-                visibleToys++;
-
-            } else {
-
-                card.style.display = "none";
-
-            }
-
-        });
-
-
-        /* No results message */
-
-        if (noResults) {
-
-            if (visibleToys === 0) {
-
-                noResults.style.display = "block";
-
-            } else {
-
-                noResults.style.display = "none";
-
-            }
-
-        }
+        filterToys(selectedFilter);
 
     });
 
 });
 
 
-/* =========================
-   CATEGORY CARDS
-========================= */
+/* =========================================================
+   CATEGORY CARD FILTERING
+========================================================= */
 
 const categoryCards =
-    document.querySelectorAll(".category-card");
+    document.querySelectorAll(
+        ".category-card"
+    );
 
 
-categoryCards.forEach(function (category) {
+categoryCards.forEach((categoryCard) => {
 
-    category.addEventListener("click", function () {
+    categoryCard.addEventListener(
+        "click",
+        () => {
 
-        const selectedCategory =
-            category.dataset.categoryLink;
-
-
-        if (!selectedCategory) {
-            return;
-        }
+            const selectedCategory =
+                categoryCard.dataset.categoryLink;
 
 
-        /* Find matching filter */
+            if (!selectedCategory) {
+                return;
+            }
 
-        filterButtons.forEach(function (button) {
 
-            if (
-                button.dataset.filter ===
-                selectedCategory
-            ) {
+            /* Find matching filter */
 
-                button.click();
+            const matchingButton =
+                document.querySelector(
+                    `.filter-btn[data-filter="${selectedCategory}"]`
+                );
+
+
+            if (matchingButton) {
+
+                matchingButton.click();
 
             }
 
-        });
-
-    });
+        }
+    );
 
 });
 
 
-/* =========================
-   CURRENT YEAR
-========================= */
+/* =========================================================
+   RESET TO ALL TOYS WHEN "TOYS" NAV IS CLICKED
+========================================================= */
 
-const copyright =
-    document.querySelector(".copyright");
+const toysNavLink =
+    document.querySelector(
+        '.nav-links a[href="#toys"]'
+    );
 
 
-if (copyright) {
+if (toysNavLink) {
 
-    copyright.innerHTML =
-        "© " +
-        new Date().getFullYear() +
-        " Kids Toys. All rights reserved.";
+    toysNavLink.addEventListener(
+        "click",
+        () => {
+
+            const allButton =
+                document.querySelector(
+                    '.filter-btn[data-filter="all"]'
+                );
+
+            if (allButton) {
+                allButton.click();
+            }
+
+        }
+    );
 
 }
 
 
-/* =========================
-   SCROLL REVEAL
-========================= */
+/* =========================================================
+   AFFILIATE LINK TRACKING
+========================================================= */
 
-const cards =
+/*
+   IMPORTANT:
+
+   Replace href="#" in your HTML with your
+   real affiliate URLs.
+
+   Example:
+
+   https://example.com/product?ref=YOUR-ID
+
+   The code below automatically detects
+   affiliate links and opens them safely.
+*/
+
+const affiliateLinks =
     document.querySelectorAll(
-        ".toy-card, .category-card"
+        'a[href]:not([href^="#"])'
     );
 
 
-if ("IntersectionObserver" in window) {
+affiliateLinks.forEach((link) => {
+
+    const href =
+        link.getAttribute("href");
+
+
+    if (
+        href &&
+        href !== "#" &&
+        (
+            href.startsWith("http://") ||
+            href.startsWith("https://")
+        )
+    ) {
+
+        link.setAttribute(
+            "target",
+            "_blank"
+        );
+
+        link.setAttribute(
+            "rel",
+            "nofollow sponsored noopener"
+        );
+
+    }
+
+});
+
+
+/* =========================================================
+   PRODUCT CLICK TRACKING
+========================================================= */
+
+/*
+   This gives you a simple way to see
+   which product was clicked in the browser console.
+
+   Later, this can be connected to Google Analytics.
+*/
+
+const productButtons =
+    document.querySelectorAll(
+        ".toy-card .toy-btn"
+    );
+
+
+productButtons.forEach((button) => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const card =
+                button.closest(".toy-card");
+
+
+            if (!card) {
+                return;
+            }
+
+
+            const productName =
+                card.querySelector("h3");
+
+
+            const productCategory =
+                card.querySelector(
+                    ".product-category"
+                );
+
+
+            console.log(
+                "Affiliate product clicked:",
+                productName
+                    ? productName.textContent.trim()
+                    : "Unknown product"
+            );
+
+
+            console.log(
+                "Category:",
+                productCategory
+                    ? productCategory.textContent.trim()
+                    : "Unknown category"
+            );
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const revealElements =
+    document.querySelectorAll(
+        ".toy-card, .category-card, .why-card, .affiliate-notice"
+    );
+
+
+if (
+    "IntersectionObserver" in window &&
+    revealElements.length
+) {
 
     const observer =
         new IntersectionObserver(
-            function (entries) {
+            (entries, observerInstance) => {
 
-                entries.forEach(function (entry) {
+                entries.forEach((entry) => {
 
-                    if (entry.isIntersecting) {
+                    if (
+                        entry.isIntersecting
+                    ) {
 
-                        entry.target.style.opacity = "1";
+                        entry.target.classList.add(
+                            "revealed"
+                        );
 
-                        entry.target.style.transform =
-                            "translateY(0)";
-
-                        observer.unobserve(
+                        observerInstance.unobserve(
                             entry.target
                         );
 
@@ -237,33 +415,142 @@ if ("IntersectionObserver" in window) {
 
             },
             {
-                threshold: 0.1
+                threshold: 0.08
             }
         );
 
 
-    cards.forEach(function (card) {
+    revealElements.forEach((element) => {
 
-        card.style.opacity = "0";
+        element.classList.add(
+            "reveal-element"
+        );
 
-        card.style.transform =
-            "translateY(15px)";
-
-        card.style.transition =
-            "opacity 0.5s ease, transform 0.5s ease";
-
-        observer.observe(card);
+        observer.observe(element);
 
     });
 
 }
 
 
-/* =========================
-   WEBSITE LOADED
-========================= */
+/* =========================================================
+   CURRENT YEAR
+========================================================= */
 
-console.log(
-    "Kids Toys website loaded successfully!"
+const copyright =
+    document.querySelector(".copyright");
+
+
+if (copyright) {
+
+    copyright.textContent =
+        "© " +
+        new Date().getFullYear() +
+        " KiddoPlay. All rights reserved.";
+
+}
+
+
+/* =========================================================
+   ESC KEY - CLOSE MOBILE MENU
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    (event) => {
+
+        if (
+            event.key === "Escape" &&
+            navLinks &&
+            navLinks.classList.contains("active")
+        ) {
+
+            navLinks.classList.remove(
+                "active"
+            );
+
+            if (menuBtn) {
+
+                menuBtn.textContent = "☰";
+
+                menuBtn.setAttribute(
+                    "aria-label",
+                    "Open menu"
+                );
+
+                menuBtn.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   PREVENT EMPTY AFFILIATE LINKS
+========================================================= */
+
+productButtons.forEach((button) => {
+
+    button.addEventListener(
+        "click",
+        (event) => {
+
+            const href =
+                button.getAttribute("href");
+
+
+            if (
+                !href ||
+                href === "#"
+            ) {
+
+                /*
+                   During development, prevent the
+                   page from jumping to the top.
+                */
+
+                event.preventDefault();
+
+                console.warn(
+                    "Affiliate link not added yet:",
+                    button
+                );
+
+            }
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        /* Show all toys initially */
+
+        filterToys("all");
+
+
+        console.log(
+            "KiddoPlay loaded successfully."
+        );
+
+        console.log(
+            "Affiliate-ready product system active."
+        );
+
+    }
 );
 ```
