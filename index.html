@@ -6,25 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 ```
-<title>KiddoPlay | Best Kids Toys, Learning & Fun</title>
+<title>KiddoPlay | Kids Toys, Educational & Creative Toys</title>
 
 <meta
     name="description"
-    content="Discover fun, creative and educational kids toys from trusted toy stores."
+    content="Discover kids toys, educational toys, creative activities and fun play ideas from selected toy stores."
 >
 
+<meta name="robots" content="index, follow">
 <meta name="theme-color" content="#ff6b35">
 
-<!-- Google Fonts -->
+<link rel="canonical" href="https://styleora-fashion.github.io/kids-toys/">
+
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
     rel="stylesheet"
 >
 
-<!-- Main CSS -->
 <link rel="stylesheet" href="./style.css">
 ```
 
@@ -33,7 +35,7 @@
 <body id="home">
 
 <!-- =========================
-     NAVBAR
+     NAVIGATION
 ========================= -->
 
 <header class="navbar">
@@ -48,7 +50,7 @@
         class="menu-btn"
         id="menuBtn"
         type="button"
-        aria-label="Open navigation menu"
+        aria-label="Open menu"
         aria-expanded="false"
         aria-controls="navLinks"
     >
@@ -56,15 +58,11 @@
     </button>
 
     <nav class="nav-links" id="navLinks" aria-label="Main navigation">
-
         <a href="#home">Home</a>
         <a href="#toys">Toys</a>
         <a href="#categories">Categories</a>
         <a href="#stores">Stores</a>
-        <a href="#affiliate-guide">Affiliate Guide</a>
-        <a href="#deals">Deals</a>
         <a href="#about">About</a>
-
     </nav>
 
 </div>
@@ -84,18 +82,17 @@
 <div class="hero-content">
 
     <span class="hero-label">
-        🧸 FUN • PLAY • LEARN
+        🧸 PLAY • LEARN • DISCOVER
     </span>
 
     <h1 id="hero-title">
-        Big Fun for
-        <span>Little Minds.</span>
+        Discover Fun
+        <span>Kids Toys.</span>
     </h1>
 
     <p>
-        Discover fun, creative and educational toys from trusted toy
-        stores. Compare categories, explore recommendations and find
-        your next favorite toy.
+        Explore educational toys, creative play ideas, vehicles,
+        building toys and more from selected toy stores.
     </p>
 
     <div class="hero-buttons">
@@ -104,33 +101,13 @@
             Explore Toys →
         </a>
 
-        <a href="#stores" class="secondary-btn">
-            Explore Stores
+        <a href="#categories" class="secondary-btn">
+            Browse Categories
         </a>
 
     </div>
 
-    <div class="hero-trust">
-
-        <div>
-            <strong>50+</strong>
-            <span>Toys</span>
-        </div>
-
-        <div>
-            <strong>4</strong>
-            <span>Categories</span>
-        </div>
-
-        <div>
-            <strong>8</strong>
-            <span>Stores</span>
-        </div>
-
-    </div>
-
 </div>
-
 
 <div class="hero-image" aria-hidden="true">
 
@@ -140,10 +117,8 @@
     <div class="hero-toy toy-block">🧱</div>
 
     <div class="hero-card">
-
-        <strong>50+</strong>
-        <span>FUN TOYS</span>
-
+        <strong>Fun</strong>
+        <span>FOR LITTLE MINDS</span>
     </div>
 
 </div>
@@ -152,34 +127,29 @@
 </section>
 
 <!-- =========================
-     AFFILIATE NOTICE
+     AFFILIATE DISCLOSURE
 ========================= -->
 
-<section class="affiliate-notice" id="affiliate-guide">
+<section class="affiliate-notice" aria-label="Affiliate disclosure">
 
 ```
-<div class="affiliate-icon">
-    💡
-</div>
+<div class="affiliate-icon">💡</div>
 
 <div>
-
     <strong>Affiliate Disclosure</strong>
 
     <p>
-        Some links on KiddoPlay are affiliate links. If you purchase
-        through one of our links, we may earn a small commission at no
-        extra cost to you. Commission rates and program terms can change
-        by merchant.
+        Some links on KiddoPlay are affiliate links. If you buy
+        something through a qualifying link, we may earn a commission
+        at no additional cost to you.
     </p>
-
 </div>
 ```
 
 </section>
 
 <!-- =========================
-     TOYS
+     TOY COLLECTION
 ========================= -->
 
 <section class="toys-section" id="toys">
@@ -188,20 +158,17 @@
 <div class="section-heading">
 
     <div>
-
-        <span class="section-label">
-            OUR COLLECTION
-        </span>
+        <span class="section-label">OUR COLLECTION</span>
 
         <h2>
             Find Your
             <span>Favorite Toy</span>
         </h2>
-
     </div>
 
     <p>
-        Explore toys for learning, creativity, adventure and everyday fun.
+        Browse popular toy types for learning, creativity,
+        imagination and everyday play.
     </p>
 
 </div>
@@ -209,360 +176,233 @@
 
 <!-- Filters -->
 
-<div
-    class="filters"
-    role="group"
-    aria-label="Toy filters"
->
+<div class="filters" role="group" aria-label="Toy categories">
 
-    <button
-        class="filter-btn active"
-        data-filter="all"
-        type="button"
-    >
+    <button class="filter-btn active" data-filter="all" type="button">
         All Toys
     </button>
 
-    <button
-        class="filter-btn"
-        data-filter="educational"
-        type="button"
-    >
+    <button class="filter-btn" data-filter="educational" type="button">
         Educational
     </button>
 
-    <button
-        class="filter-btn"
-        data-filter="vehicles"
-        type="button"
-    >
+    <button class="filter-btn" data-filter="vehicles" type="button">
         Vehicles
     </button>
 
-    <button
-        class="filter-btn"
-        data-filter="soft"
-        type="button"
-    >
-        Soft Toys
+    <button class="filter-btn" data-filter="creative" type="button">
+        Creative
     </button>
 
-    <button
-        class="filter-btn"
-        data-filter="creative"
-        type="button"
-    >
-        Creative
+    <button class="filter-btn" data-filter="building" type="button">
+        Building
+    </button>
+
+    <button class="filter-btn" data-filter="baby" type="button">
+        Baby & Toddler
     </button>
 
 </div>
 
 
-<!-- Toy Grid -->
+<!-- =========================
+     PRODUCT GRID
+========================= -->
 
 <div class="toy-grid" id="toyGrid">
 
 
-    <!-- Toy 1 -->
+    <!-- 01 -->
 
-    <article
-        class="toy-card"
-        data-category="educational"
-    >
+    <article class="toy-card" data-category="educational">
 
         <div class="toy-image toy-1">
-
-            <span class="product-badge">
-                🧩 POPULAR
-            </span>
-
-            <span class="toy-emoji">
-                🧩
-            </span>
-
+            <span class="product-badge">🧩 LEARNING</span>
+            <span class="toy-emoji">🧩</span>
         </div>
 
         <div class="toy-content">
 
-            <span class="product-category">
-                EDUCATIONAL
-            </span>
+            <span class="product-category">EDUCATIONAL</span>
 
-            <h3>
-                Learning Puzzle
-            </h3>
+            <h3>Learning Puzzles</h3>
 
             <p>
-                A fun puzzle designed to encourage problem-solving,
-                focus and creativity.
+                Fun puzzle ideas that encourage problem-solving,
+                focus and early learning.
             </p>
-
-            <div class="product-meta">
-                <span class="rating">⭐ 4.8</span>
-                <span class="age">Ages 3+</span>
-            </div>
 
             <a
                 href="https://www.justforkids.pk/"
                 class="toy-btn affiliate-link"
                 data-store="JustForKids.pk"
-                data-product="Learning Puzzle"
+                data-product="Learning Puzzles"
                 target="_blank"
                 rel="nofollow sponsored noopener"
             >
-                View Toy →
+                Explore Toy →
             </a>
 
         </div>
-
     </article>
 
 
-    <!-- Toy 2 -->
+    <!-- 02 -->
 
-    <article
-        class="toy-card"
-        data-category="vehicles"
-    >
+    <article class="toy-card" data-category="vehicles">
 
         <div class="toy-image toy-2">
-
-            <span class="product-badge blue">
-                🚗 BEST SELLER
-            </span>
-
-            <span class="toy-emoji">
-                🚗
-            </span>
-
+            <span class="product-badge blue">🚗 FUN PICK</span>
+            <span class="toy-emoji">🚗</span>
         </div>
 
         <div class="toy-content">
 
-            <span class="product-category">
-                VEHICLES
-            </span>
+            <span class="product-category">VEHICLES</span>
 
-            <h3>
-                Mini Racing Car
-            </h3>
+            <h3>Mini Racing Cars</h3>
 
             <p>
-                A colorful racing car for exciting indoor and outdoor play.
+                Discover exciting toy cars and racing toys
+                for imaginative play.
             </p>
-
-            <div class="product-meta">
-                <span class="rating">⭐ 4.7</span>
-                <span class="age">Ages 3+</span>
-            </div>
 
             <a
                 href="https://tobouy.com/?ref=Kiddoplay"
                 class="toy-btn affiliate-link"
                 data-store="Tobouy"
-                data-product="Mini Racing Car"
+                data-product="Mini Racing Cars"
                 target="_blank"
                 rel="nofollow sponsored noopener"
             >
-                View Toy →
+                Explore Toy →
             </a>
 
         </div>
-
     </article>
 
 
-    <!-- Toy 3 -->
+    <!-- 03 -->
 
-    <article
-        class="toy-card"
-        data-category="soft"
-    >
+    <article class="toy-card" data-category="baby">
 
         <div class="toy-image toy-3">
-
-            <span class="toy-emoji">
-                🧸
-            </span>
-
+            <span class="toy-emoji">🧸</span>
         </div>
 
         <div class="toy-content">
 
-            <span class="product-category">
-                SOFT TOYS
-            </span>
+            <span class="product-category">BABY & TODDLER</span>
 
-            <h3>
-                Classic Teddy Bear
-            </h3>
+            <h3>Soft Teddy Bears</h3>
 
             <p>
-                A soft and cuddly teddy bear perfect for little ones
-                and imaginative play.
+                Soft and cuddly toy ideas for comfort,
+                imagination and pretend play.
             </p>
-
-            <div class="product-meta">
-                <span class="rating">⭐ 4.9</span>
-                <span class="age">Ages 2+</span>
-            </div>
 
             <a
                 href="https://tumama-kids.com/"
                 class="toy-btn affiliate-link"
                 data-store="Tumama Kids"
-                data-product="Classic Teddy Bear"
+                data-product="Soft Teddy Bears"
                 target="_blank"
                 rel="nofollow sponsored noopener"
             >
-                View Toy →
+                Explore Toy →
             </a>
 
         </div>
-
     </article>
 
 
-    <!-- Toy 4 -->
+    <!-- 04 -->
 
-    <article
-        class="toy-card"
-        data-category="creative"
-    >
+    <article class="toy-card" data-category="creative">
 
         <div class="toy-image toy-4">
-
-            <span class="product-badge purple">
-                🎨 CREATIVE PICK
-            </span>
-
-            <span class="toy-emoji">
-                🎨
-            </span>
-
+            <span class="product-badge purple">🎨 CREATIVE</span>
+            <span class="toy-emoji">🎨</span>
         </div>
 
         <div class="toy-content">
 
-            <span class="product-category">
-                CREATIVE
-            </span>
+            <span class="product-category">CREATIVE</span>
 
-            <h3>
-                Art & Color Set
-            </h3>
+            <h3>Art & Coloring Sets</h3>
 
             <p>
-                A creative art set for drawing, coloring and developing
-                imagination.
+                Drawing, coloring and craft ideas that help
+                children express their creativity.
             </p>
-
-            <div class="product-meta">
-                <span class="rating">⭐ 4.8</span>
-                <span class="age">Ages 4+</span>
-            </div>
 
             <a
                 href="https://www.schoolcrafts.com.pk/"
                 class="toy-btn affiliate-link"
                 data-store="School Crafts Pakistan"
-                data-product="Art & Color Set"
+                data-product="Art and Coloring Sets"
                 target="_blank"
                 rel="nofollow sponsored noopener"
             >
-                View Toy →
+                Explore Toy →
             </a>
 
         </div>
-
     </article>
 
 
-    <!-- Toy 5 -->
+    <!-- 05 -->
 
-    <article
-        class="toy-card"
-        data-category="vehicles"
-    >
+    <article class="toy-card" data-category="vehicles">
 
         <div class="toy-image toy-5">
-
-            <span class="toy-emoji">
-                🚂
-            </span>
-
+            <span class="toy-emoji">🚂</span>
         </div>
 
         <div class="toy-content">
 
-            <span class="product-category">
-                VEHICLES
-            </span>
+            <span class="product-category">VEHICLES</span>
 
-            <h3>
-                Little Train Set
-            </h3>
+            <h3>Train & Railway Toys</h3>
 
             <p>
-                Build tracks and create exciting railway adventures
+                Build tracks and create fun railway adventures
                 at home.
             </p>
-
-            <div class="product-meta">
-                <span class="rating">⭐ 4.6</span>
-                <span class="age">Ages 3+</span>
-            </div>
 
             <a
                 href="https://tobouy.com/"
                 class="toy-btn affiliate-link"
                 data-store="Tobouy"
-                data-product="Little Train Set"
+                data-product="Train and Railway Toys"
                 target="_blank"
                 rel="nofollow sponsored noopener"
             >
-                View Toy →
+                Explore Toy →
             </a>
 
         </div>
-
     </article>
 
 
-    <!-- Toy 6 -->
+    <!-- 06 -->
 
-    <article
-        class="toy-card"
-        data-category="educational"
-    >
+    <article class="toy-card" data-category="educational">
 
         <div class="toy-image toy-6">
-
-            <span class="toy-emoji">
-                🔢
-            </span>
-
+            <span class="toy-emoji">🔢</span>
         </div>
 
         <div class="toy-content">
 
-            <span class="product-category">
-                EDUCATIONAL
-            </span>
+            <span class="product-category">EDUCATIONAL</span>
 
-            <h3>
-                Learning Numbers
-            </h3>
+            <h3>Learning Numbers</h3>
 
             <p>
-                A playful way for children to practice numbers,
-                counting and early math skills.
+                Play-based number and counting activities
+                for early learners.
             </p>
-
-            <div class="product-meta">
-                <span class="rating">⭐ 4.7</span>
-                <span class="age">Ages 3+</span>
-            </div>
 
             <a
                 href="https://montessorigeneration.com/"
@@ -572,102 +412,66 @@
                 target="_blank"
                 rel="nofollow sponsored noopener"
             >
-                View Toy →
+                Explore Toy →
             </a>
 
         </div>
-
     </article>
 
 
-    <!-- Toy 7 -->
+    <!-- 07 -->
 
-    <article
-        class="toy-card"
-        data-category="soft"
-    >
+    <article class="toy-card" data-category="baby">
 
         <div class="toy-image toy-7">
-
-            <span class="toy-emoji">
-                🐰
-            </span>
-
+            <span class="toy-emoji">🐰</span>
         </div>
 
         <div class="toy-content">
 
-            <span class="product-category">
-                SOFT TOYS
-            </span>
+            <span class="product-category">BABY & TODDLER</span>
 
-            <h3>
-                Fluffy Bunny
-            </h3>
+            <h3>Soft Bunny Toys</h3>
 
             <p>
-                A cute and soft bunny toy for comfort and imaginative play.
+                Cute soft toys designed for imaginative
+                and comfort play.
             </p>
-
-            <div class="product-meta">
-                <span class="rating">⭐ 4.8</span>
-                <span class="age">Ages 2+</span>
-            </div>
 
             <a
                 href="https://tumama-kids.com/"
                 class="toy-btn affiliate-link"
                 data-store="Tumama Kids"
-                data-product="Fluffy Bunny"
+                data-product="Soft Bunny Toys"
                 target="_blank"
                 rel="nofollow sponsored noopener"
             >
-                View Toy →
+                Explore Toy →
             </a>
 
         </div>
-
     </article>
 
 
-    <!-- Toy 8 -->
+    <!-- 08 -->
 
-    <article
-        class="toy-card"
-        data-category="creative"
-    >
+    <article class="toy-card" data-category="building">
 
         <div class="toy-image toy-8">
-
-            <span class="product-badge green">
-                🧱 KIDS PICK
-            </span>
-
-            <span class="toy-emoji">
-                🧱
-            </span>
-
+            <span class="product-badge green">🧱 BUILD</span>
+            <span class="toy-emoji">🧱</span>
         </div>
 
         <div class="toy-content">
 
-            <span class="product-category">
-                CREATIVE
-            </span>
+            <span class="product-category">BUILDING</span>
 
-            <h3>
-                Building Blocks
-            </h3>
+            <h3>Building Blocks</h3>
 
             <p>
-                Colorful building blocks that encourage imagination,
-                design and creativity.
+                Colorful building toys that encourage
+                imagination and creative thinking.
             </p>
-
-            <div class="product-meta">
-                <span class="rating">⭐ 4.9</span>
-                <span class="age">Ages 3+</span>
-            </div>
 
             <a
                 href="https://sainsmartjr.com/"
@@ -677,21 +481,152 @@
                 target="_blank"
                 rel="nofollow sponsored noopener"
             >
-                View Toy →
+                Explore Toy →
             </a>
 
         </div>
+    </article>
 
+
+    <!-- 09 -->
+
+    <article class="toy-card" data-category="educational">
+
+        <div class="toy-image toy-1">
+            <span class="toy-emoji">🧠</span>
+        </div>
+
+        <div class="toy-content">
+
+            <span class="product-category">EDUCATIONAL</span>
+
+            <h3>Montessori Learning Toys</h3>
+
+            <p>
+                Explore Montessori-inspired activities
+                for independent learning and play.
+            </p>
+
+            <a
+                href="https://montessorigeneration.com/"
+                class="toy-btn affiliate-link"
+                data-store="Montessori Generation"
+                data-product="Montessori Learning Toys"
+                target="_blank"
+                rel="nofollow sponsored noopener"
+            >
+                Explore Toy →
+            </a>
+
+        </div>
+    </article>
+
+
+    <!-- 10 -->
+
+    <article class="toy-card" data-category="creative">
+
+        <div class="toy-image toy-4">
+            <span class="toy-emoji">✏️</span>
+        </div>
+
+        <div class="toy-content">
+
+            <span class="product-category">CREATIVE</span>
+
+            <h3>Kids Craft Activities</h3>
+
+            <p>
+                Creative craft supplies and activity ideas
+                for curious young minds.
+            </p>
+
+            <a
+                href="https://www.schoolcrafts.com.pk/"
+                class="toy-btn affiliate-link"
+                data-store="School Crafts Pakistan"
+                data-product="Kids Craft Activities"
+                target="_blank"
+                rel="nofollow sponsored noopener"
+            >
+                Explore Toy →
+            </a>
+
+        </div>
+    </article>
+
+
+    <!-- 11 -->
+
+    <article class="toy-card" data-category="building">
+
+        <div class="toy-image toy-8">
+            <span class="toy-emoji">🏗️</span>
+        </div>
+
+        <div class="toy-content">
+
+            <span class="product-category">BUILDING</span>
+
+            <h3>STEM Building Toys</h3>
+
+            <p>
+                Building and STEM-inspired toys for hands-on
+                problem-solving and creativity.
+            </p>
+
+            <a
+                href="https://sainsmartjr.com/"
+                class="toy-btn affiliate-link"
+                data-store="SainSmart Jr."
+                data-product="STEM Building Toys"
+                target="_blank"
+                rel="nofollow sponsored noopener"
+            >
+                Explore Toy →
+            </a>
+
+        </div>
+    </article>
+
+
+    <!-- 12 -->
+
+    <article class="toy-card" data-category="vehicles">
+
+        <div class="toy-image toy-2">
+            <span class="toy-emoji">🏎️</span>
+        </div>
+
+        <div class="toy-content">
+
+            <span class="product-category">VEHICLES</span>
+
+            <h3>RC & Remote Control Toys</h3>
+
+            <p>
+                Discover remote-control vehicles and exciting
+                driving toys for kids.
+            </p>
+
+            <a
+                href="https://tobouy.com/?ref=Kiddoplay"
+                class="toy-btn affiliate-link"
+                data-store="Tobouy"
+                data-product="RC and Remote Control Toys"
+                target="_blank"
+                rel="nofollow sponsored noopener"
+            >
+                Explore Toy →
+            </a>
+
+        </div>
     </article>
 
 </div>
 
 
-<div
-    class="no-results"
-    id="noResults"
-    hidden
->
+<div class="no-results" id="noResults" hidden>
     No toys found in this category.
 </div>
 ```
@@ -707,9 +642,7 @@
 ```
 <div class="category-heading">
 
-    <span class="section-label">
-        EXPLORE
-    </span>
+    <span class="section-label">EXPLORE</span>
 
     <h2>
         Shop by
@@ -717,8 +650,8 @@
     </h2>
 
     <p>
-        Find the right type of toy for every child's interests
-        and imagination.
+        Find toys based on your child's interests,
+        age and style of play.
     </p>
 
 </div>
@@ -734,7 +667,7 @@
         <strong>01</strong>
         <span class="category-icon">🧠</span>
         <h3>Educational</h3>
-        <p>Learn while having fun →</p>
+        <p>Learning through play →</p>
     </button>
 
 
@@ -746,19 +679,19 @@
         <strong>02</strong>
         <span class="category-icon">🚗</span>
         <h3>Vehicles</h3>
-        <p>Cars, trains & more →</p>
+        <p>Cars, trains & RC toys →</p>
     </button>
 
 
     <button
         class="category-card soft-category"
-        data-category-link="soft"
+        data-category-link="baby"
         type="button"
     >
         <strong>03</strong>
         <span class="category-icon">🧸</span>
-        <h3>Soft Toys</h3>
-        <p>Meet cute friends →</p>
+        <h3>Baby & Toddler</h3>
+        <p>Soft & sensory play →</p>
     </button>
 
 
@@ -770,7 +703,7 @@
         <strong>04</strong>
         <span class="category-icon">🎨</span>
         <h3>Creative</h3>
-        <p>Create something amazing →</p>
+        <p>Art, craft & imagination →</p>
     </button>
 
 </div>
@@ -788,21 +721,17 @@
 <div class="section-heading">
 
     <div>
-
-        <span class="section-label">
-            TRUSTED TOY STORES
-        </span>
+        <span class="section-label">SELECTED STORES</span>
 
         <h2>
             Explore Kids
             <span>Toy Stores</span>
         </h2>
-
     </div>
 
     <p>
-        Compare toy stores, affiliate commissions, cookie periods
-        and the main reason each store may be useful for your audience.
+        Discover different stores and explore toys that match
+        your interests.
     </p>
 
 </div>
@@ -815,30 +744,22 @@
 
         <div class="store-icon">🧸</div>
 
-        <span class="store-location">
-            PAKISTAN
-        </span>
+        <span class="store-location">PAKISTAN</span>
 
-        <h3>
-            JustForKids.pk
-        </h3>
-
-        <div class="store-meta">
-            <span>💰 Up to 20%</span>
-            <span>🍪 Apply for details</span>
-        </div>
+        <h3>JustForKids.pk</h3>
 
         <p>
-            Pakistan-focused educational and screen-free toys.
+            Educational, screen-free and play-focused
+            toys for children.
         </p>
 
         <a
             href="https://www.justforkids.pk/"
+            class="store-btn"
             target="_blank"
             rel="nofollow sponsored noopener"
-            class="store-btn"
         >
-            Visit Store →
+            Explore Store →
         </a>
 
     </article>
@@ -848,31 +769,22 @@
 
         <div class="store-icon">🧠</div>
 
-        <span class="store-location">
-            INTERNATIONAL
-        </span>
+        <span class="store-location">INTERNATIONAL</span>
 
-        <h3>
-            Montessori Generation
-        </h3>
-
-        <div class="store-meta">
-            <span>💰 25%</span>
-            <span>🍪 30 days</span>
-        </div>
+        <h3>Montessori Generation</h3>
 
         <p>
-            Montessori toys focused on learning, independence
-            and development.
+            Montessori-inspired toys and activities
+            focused on learning through play.
         </p>
 
         <a
             href="https://montessorigeneration.com/"
+            class="store-btn"
             target="_blank"
             rel="nofollow sponsored noopener"
-            class="store-btn"
         >
-            Visit Store →
+            Explore Store →
         </a>
 
     </article>
@@ -882,31 +794,22 @@
 
         <div class="store-icon">🚗</div>
 
-        <span class="store-location">
-            INTERNATIONAL
-        </span>
+        <span class="store-location">INTERNATIONAL</span>
 
-        <h3>
-            Tobouy
-        </h3>
-
-        <div class="store-meta">
-            <span>💰 Up to 15%</span>
-            <span>🍪 Program details</span>
-        </div>
+        <h3>Tobouy</h3>
 
         <p>
-            Global shipping with RC vehicles, construction
-            and kids toys.
+            RC vehicles, construction toys and other
+            kids play products.
         </p>
 
         <a
-            href="https://tobouy.com/"
+            href="https://tobouy.com/?ref=Kiddoplay"
+            class="store-btn"
             target="_blank"
             rel="nofollow sponsored noopener"
-            class="store-btn"
         >
-            Visit Store →
+            Explore Store →
         </a>
 
     </article>
@@ -916,464 +819,27 @@
 
         <div class="store-icon">🐰</div>
 
-        <span class="store-location">
-            INTERNATIONAL
-        </span>
+        <span class="store-location">INTERNATIONAL</span>
 
-        <h3>
-            Tumama Kids
-        </h3>
-
-        <div class="store-meta">
-            <span>💰 10–15%</span>
-            <span>🍪 30 days</span>
-        </div>
+        <h3>Tumama Kids</h3>
 
         <p>
-            Baby, sensory, educational and activity toys for children.
+            Baby, sensory, activity and educational
+            toys for children.
         </p>
 
         <a
             href="https://tumama-kids.com/"
+            class="store-btn"
             target="_blank"
             rel="nofollow sponsored noopener"
-            class="store-btn"
         >
-            Visit Store →
-        </a>
-
-    </article>
-
-
-    <article class="store-card">
-
-        <div class="store-icon">🎁</div>
-
-        <span class="store-location">
-            INTERNATIONAL
-        </span>
-
-        <h3>
-            Best Kids Toys
-        </h3>
-
-        <div class="store-meta">
-            <span>💰 10%</span>
-            <span>🍪 Program details</span>
-        </div>
-
-        <p>
-            Toy ideas, creator partnerships and discount-code
-            opportunities.
-        </p>
-
-        <a
-            href="https://thebestkidstoys.com/"
-            target="_blank"
-            rel="nofollow sponsored noopener"
-            class="store-btn"
-        >
-            Visit Store →
-        </a>
-
-    </article>
-
-
-    <article class="store-card">
-
-        <div class="store-icon">🧱</div>
-
-        <span class="store-location">
-            INTERNATIONAL
-        </span>
-
-        <h3>
-            SainSmart Jr.
-        </h3>
-
-        <div class="store-meta">
-            <span>💰 Up to 6%</span>
-            <span>🍪 Program details</span>
-        </div>
-
-        <p>
-            STEM, building, wooden and educational toys for kids.
-        </p>
-
-        <a
-            href="https://sainsmartjr.com/"
-            target="_blank"
-            rel="nofollow sponsored noopener"
-            class="store-btn"
-        >
-            Visit Store →
-        </a>
-
-    </article>
-
-
-    <article class="store-card">
-
-        <div class="store-icon">🎨</div>
-
-        <span class="store-location">
-            PAKISTAN
-        </span>
-
-        <h3>
-            School Crafts Pakistan
-        </h3>
-
-        <div class="store-meta">
-            <span>💰 5%</span>
-            <span>🍪 Program details</span>
-        </div>
-
-        <p>
-            Educational toys, Montessori materials, art and
-            craft products.
-        </p>
-
-        <a
-            href="https://www.schoolcrafts.com.pk/"
-            target="_blank"
-            rel="nofollow sponsored noopener"
-            class="store-btn"
-        >
-            Visit Store →
-        </a>
-
-    </article>
-
-
-    <article class="store-card">
-
-        <div class="store-icon">🛒</div>
-
-        <span class="store-location">
-            PAKISTAN
-        </span>
-
-        <h3>
-            Goto Pakistan
-        </h3>
-
-        <div class="store-meta">
-            <span>💰 2% Baby/Toys/Kids</span>
-            <span>🍪 Affiliate tracking</span>
-        </div>
-
-        <p>
-            Large Pakistani marketplace with Baby, Toys & Kids products.
-        </p>
-
-        <a
-            href="https://www.goto.com.pk/"
-            target="_blank"
-            rel="nofollow sponsored noopener"
-            class="store-btn"
-        >
-            Visit Store →
+            Explore Store →
         </a>
 
     </article>
 
 </div>
-```
-
-</section>
-
-<!-- =========================
-     AFFILIATE TABLE
-========================= -->
-
-<section class="affiliate-table-section">
-
-```
-<div class="section-heading centered">
-
-    <div>
-
-        <span class="section-label">
-            AFFILIATE COMPARISON
-        </span>
-
-        <h2>
-            Compare
-            <span>Affiliate Programs</span>
-        </h2>
-
-    </div>
-
-    <p>
-        A quick reference for commission rates, cookie/tracking
-        information and the main selling point of each toy store.
-    </p>
-
-</div>
-
-
-<div class="table-wrapper">
-
-    <table class="affiliate-table">
-
-        <thead>
-
-            <tr>
-                <th>Affiliate Website</th>
-                <th>Commission</th>
-                <th>Cookie / Tracking</th>
-                <th>Khaas Baat</th>
-                <th>Website</th>
-            </tr>
-
-        </thead>
-
-        <tbody>
-
-            <tr>
-                <td data-label="Affiliate Website">
-                    <strong>JustForKids.pk</strong>
-                </td>
-
-                <td data-label="Commission">
-                    Up to 20%
-                </td>
-
-                <td data-label="Cookie / Tracking">
-                    Details after application
-                </td>
-
-                <td data-label="Khaas Baat">
-                    Pakistan-focused, educational and screen-free toys
-                </td>
-
-                <td data-label="Website">
-                    <a
-                        href="https://www.justforkids.pk/"
-                        target="_blank"
-                        rel="nofollow sponsored noopener"
-                    >
-                        Visit →
-                    </a>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td data-label="Affiliate Website">
-                    <strong>Montessori Generation</strong>
-                </td>
-
-                <td data-label="Commission">
-                    25%
-                </td>
-
-                <td data-label="Cookie / Tracking">
-                    30 days
-                </td>
-
-                <td data-label="Khaas Baat">
-                    Montessori toys, worldwide delivery
-                </td>
-
-                <td data-label="Website">
-                    <a
-                        href="https://montessorigeneration.com/"
-                        target="_blank"
-                        rel="nofollow sponsored noopener"
-                    >
-                        Visit →
-                    </a>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td data-label="Affiliate Website">
-                    <strong>Tobouy</strong>
-                </td>
-
-                <td data-label="Commission">
-                    Up to 15%
-                </td>
-
-                <td data-label="Cookie / Tracking">
-                    Program details
-                </td>
-
-                <td data-label="Khaas Baat">
-                    Global shipping, RC and construction toys
-                </td>
-
-                <td data-label="Website">
-                    <a
-                        href="https://tobouy.com/"
-                        target="_blank"
-                        rel="nofollow sponsored noopener"
-                    >
-                        Visit →
-                    </a>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td data-label="Affiliate Website">
-                    <strong>Tumama Kids</strong>
-                </td>
-
-                <td data-label="Commission">
-                    10–15%
-                </td>
-
-                <td data-label="Cookie / Tracking">
-                    30 days
-                </td>
-
-                <td data-label="Khaas Baat">
-                    Baby, sensory and educational toys
-                </td>
-
-                <td data-label="Website">
-                    <a
-                        href="https://tumama-kids.com/"
-                        target="_blank"
-                        rel="nofollow sponsored noopener"
-                    >
-                        Visit →
-                    </a>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td data-label="Affiliate Website">
-                    <strong>Best Kids Toys</strong>
-                </td>
-
-                <td data-label="Commission">
-                    10%
-                </td>
-
-                <td data-label="Cookie / Tracking">
-                    Program details
-                </td>
-
-                <td data-label="Khaas Baat">
-                    Discount codes + creator partnerships
-                </td>
-
-                <td data-label="Website">
-                    <a
-                        href="https://thebestkidstoys.com/"
-                        target="_blank"
-                        rel="nofollow sponsored noopener"
-                    >
-                        Visit →
-                    </a>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td data-label="Affiliate Website">
-                    <strong>SainSmart Jr.</strong>
-                </td>
-
-                <td data-label="Commission">
-                    Up to 6%
-                </td>
-
-                <td data-label="Cookie / Tracking">
-                    Program details
-                </td>
-
-                <td data-label="Khaas Baat">
-                    STEM, building, wooden and educational toys
-                </td>
-
-                <td data-label="Website">
-                    <a
-                        href="https://sainsmartjr.com/"
-                        target="_blank"
-                        rel="nofollow sponsored noopener"
-                    >
-                        Visit →
-                    </a>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td data-label="Affiliate Website">
-                    <strong>School Crafts Pakistan</strong>
-                </td>
-
-                <td data-label="Commission">
-                    5%
-                </td>
-
-                <td data-label="Cookie / Tracking">
-                    Program details
-                </td>
-
-                <td data-label="Khaas Baat">
-                    Pakistan-based educational, Montessori and craft products
-                </td>
-
-                <td data-label="Website">
-                    <a
-                        href="https://www.schoolcrafts.com.pk/"
-                        target="_blank"
-                        rel="nofollow sponsored noopener"
-                    >
-                        Visit →
-                    </a>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td data-label="Affiliate Website">
-                    <strong>Goto Pakistan</strong>
-                </td>
-
-                <td data-label="Commission">
-                    2% Baby/Toys/Kids
-                </td>
-
-                <td data-label="Cookie / Tracking">
-                    Affiliate tracking
-                </td>
-
-                <td data-label="Khaas Baat">
-                    Large Pakistani marketplace
-                </td>
-
-                <td data-label="Website">
-                    <a
-                        href="https://www.goto.com.pk/"
-                        target="_blank"
-                        rel="nofollow sponsored noopener"
-                    >
-                        Visit →
-                    </a>
-                </td>
-            </tr>
-
-        </tbody>
-
-    </table>
-
-</div>
-
-
-<p class="table-note">
-    ℹ️ Commission rates, cookie windows and affiliate terms may change.
-    Always verify current terms inside the merchant's affiliate
-    dashboard before publishing earnings claims.
-</p>
 ```
 
 </section>
@@ -1388,21 +854,17 @@
 <div class="section-heading centered">
 
     <div>
-
-        <span class="section-label">
-            WHY KIDDOPLAY?
-        </span>
+        <span class="section-label">WHY KIDDOPLAY?</span>
 
         <h2>
-            Making Toy
-            <span>Discovery Easy</span>
+            Simple Toy
+            <span>Discovery</span>
         </h2>
-
     </div>
 
     <p>
-        We help parents discover interesting toys without making
-        the search complicated.
+        We make it easier to discover different kinds of
+        toys without searching through countless stores.
     </p>
 
 </div>
@@ -1412,16 +874,12 @@
 
     <article class="why-card">
 
-        <div class="why-icon">
-            🔎
-        </div>
+        <div class="why-icon">🔎</div>
 
-        <h3>
-            Easy Discovery
-        </h3>
+        <h3>Easy Discovery</h3>
 
         <p>
-            Browse different toy categories in one simple place.
+            Browse different types of toys in one simple place.
         </p>
 
     </article>
@@ -1429,16 +887,13 @@
 
     <article class="why-card">
 
-        <div class="why-icon">
-            🧠
-        </div>
+        <div class="why-icon">🧠</div>
 
-        <h3>
-            Learning Focus
-        </h3>
+        <h3>Learning & Play</h3>
 
         <p>
-            Discover toys that combine play, creativity and learning.
+            Discover educational and creative ways for
+            children to learn through play.
         </p>
 
     </article>
@@ -1446,71 +901,16 @@
 
     <article class="why-card">
 
-        <div class="why-icon">
-            ❤️
-        </div>
+        <div class="why-icon">❤️</div>
 
-        <h3>
-            Kid-Friendly Picks
-        </h3>
+        <h3>Made for Parents</h3>
 
         <p>
-            Explore fun ideas suitable for different interests and ages.
+            A simple starting point for exploring toys
+            for different ages and interests.
         </p>
 
     </article>
-
-</div>
-```
-
-</section>
-
-<!-- =========================
-     DEALS
-========================= -->
-
-<section class="deals-section" id="deals">
-
-```
-<div class="deal-content">
-
-    <span class="section-label">
-        FIND YOUR NEXT FAVORITE
-    </span>
-
-    <h2>
-        Ready for
-        <span>More Fun?</span>
-    </h2>
-
-    <p>
-        Explore our recommended toy collection and discover
-        something special for your little one.
-    </p>
-
-    <a
-        href="#stores"
-        class="main-btn white-btn"
-    >
-        Explore Stores →
-    </a>
-
-</div>
-
-
-<div class="deal-visual" aria-hidden="true">
-
-    <div class="deal-circle circle-one">
-        ⭐
-    </div>
-
-    <div class="deal-circle circle-two">
-        🎁
-    </div>
-
-    <div class="deal-circle circle-three">
-        🧸
-    </div>
 
 </div>
 ```
@@ -1524,26 +924,28 @@
 <section class="about" id="about">
 
 ```
-<span class="section-label">
-    ABOUT KIDDOPLAY
-</span>
+<span class="section-label">ABOUT KIDDOPLAY</span>
 
 <h2>
     Play More.
-    <span>Learn More.</span>
+    <span>Discover More.</span>
 </h2>
 
 <p>
-    KiddoPlay is a toy discovery website created to help parents
-    explore fun, creative and educational toys in one simple place.
-    We highlight products, compare toy stores and direct visitors
-    to external stores where they can learn more or make a purchase.
+    KiddoPlay is a kids toy discovery website that helps
+    parents and families explore educational, creative,
+    building, vehicle and play-focused toys from selected
+    online stores.
 </p>
 
-<a
-    href="#toys"
-    class="main-btn"
->
+<p>
+    We do not sell the products directly. When you choose
+    a toy or store, you may be redirected to an external
+    retailer where you can view the product and purchase
+    directly from that store.
+</p>
+
+<a href="#toys" class="main-btn">
     Explore Toys →
 </a>
 ```
@@ -1559,26 +961,21 @@
 ```
 <div>
 
-    <span>
-        🎁 MAKE PLAYTIME SPECIAL
-    </span>
+    <span>🎁 DISCOVER SOMETHING FUN</span>
 
     <h2>
-        Find Something
+        Find a Toy
         <strong>They'll Love.</strong>
     </h2>
 
     <p>
-        Explore our collection of fun and creative kids toys.
+        Start exploring our kids toy collection.
     </p>
 
 </div>
 
-<a
-    href="#stores"
-    class="main-btn white-btn"
->
-    Visit Toy Stores →
+<a href="#toys" class="main-btn white-btn">
+    Explore Collection →
 </a>
 ```
 
@@ -1597,11 +994,7 @@
 
     <div>
 
-        <a
-            href="#home"
-            class="logo"
-            aria-label="KiddoPlay Home"
-        >
+        <a href="#home" class="logo" aria-label="KiddoPlay Home">
             Kiddo<span>Play</span>
         </a>
 
@@ -1610,24 +1003,22 @@
         </p>
 
         <small>
-            Affiliate links may earn us a commission at no additional
-            cost to you.
+            Some links may be affiliate links.
+            We may earn a commission at no extra cost to you.
         </small>
 
     </div>
 
 
-    <div class="footer-links">
+    <nav class="footer-links" aria-label="Footer navigation">
 
         <a href="#home">Home</a>
         <a href="#toys">Toys</a>
         <a href="#categories">Categories</a>
         <a href="#stores">Stores</a>
-        <a href="#affiliate-guide">Affiliate Guide</a>
-        <a href="#deals">Deals</a>
         <a href="#about">About</a>
 
-    </div>
+    </nav>
 
 </div>
 
@@ -1638,8 +1029,6 @@
 ```
 
 </footer>
-
-<!-- Main JavaScript -->
 
 <script src="./script.js" defer></script>
 
