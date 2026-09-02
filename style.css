@@ -1351,19 +1351,29 @@ footer {
         padding: 55px 7%;
     }
 
-    .footer-top {
-        flex-direction: column;
-        text-align: center;
-    }
+.footer-top {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 35px;
+}
 
-    .footer-top small {
-        margin: auto;
-    }
+.footer-top > div:first-child {
+    max-width: 100%;
+    margin: 0 auto;
+}
 
-    .footer-links {
-        justify-content: center;
-        margin: auto;
-    }
+.footer-top small {
+    max-width: 430px;
+    margin: 0 auto;
+}
+
+.footer-links {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    gap: 14px 20px;
+    max-width: 450px;
+    margin: 0 auto;
+   }
 }
 
 
