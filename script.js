@@ -1,24 +1,70 @@
 ```javascript
-"use strict";
-
 /* =========================================================
-   KIDDOPLAY - MAIN JAVASCRIPT
-   Compatible with the supplied KiddoPlay HTML
-========================================================= */
-
-
-/* =========================================================
-   DOM READY
-========================================================= */
+   KIDDO PLAY - MAIN JAVASCRIPT
+   ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* -----------------------------------------------------
-       ELEMENTS
-    ----------------------------------------------------- */
+    /* =====================================================
+       MOBILE NAVIGATION
+       ===================================================== */
 
     const menuBtn = document.getElementById("menuBtn");
     const navLinks = document.getElementById("navLinks");
+
+    if (menuBtn && navLinks) {
+
+        menuBtn.addEventListener("click", () => {
+
+            const isOpen = navLinks.classList.toggle("open");
+
+            menuBtn.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+            menuBtn.setAttribute(
+                "aria-label",
+                isOpen
+                    ? "Close navigation menu"
+                    : "Open navigation menu"
+            );
+
+            menuBtn.textContent = isOpen ? "✕" : "☰";
+        });
+
+
+        /* Close menu after clicking a navigation link */
+
+        const navigationItems = navLinks.querySelectorAll("a");
+
+        navigationItems.forEach((link) => {
+
+            link.addEventListener("click", () => {
+
+                navLinks.classList.remove("open");
+
+                menuBtn.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                menuBtn.setAttribute(
+                    "aria-label",
+                    "Open navigation menu"
+                );
+
+                menuBtn.textContent = "☰";
+            });
+
+        });
+
+    }
+
+
+    /* =====================================================
+       TOY FILTER SYSTEM
+       ===================================================== */
 
     const filterButtons =
         document.querySelectorAll(".filter-btn");
@@ -26,569 +72,228 @@ document.addEventListener("DOMContentLoaded", () => {
     const toyCards =
         document.querySelectorAll(".toy-card");
 
-    const categoryCards =
-        document.querySelectorAll(".category-card");
-
     const noResults =
         document.getElementById("noResults");
 
-    const productButtons =
-        document.querySelectorAll(".toy-card .toy-btn");
 
-    const copyright =
-        document.querySelector(".copyright");
+    function filterToys(category) {
 
-
-    /* =====================================================
-       MOBILE MENU
-    ===================================================== */
-
-    function closeMobileMenu() {
-
-        if (!navLinks || !menuBtn) {
-            return;
-        }
-
-        navLinks.classList.remove("active");
-
-        menuBtn.textContent = "☰";
-
-        menuBtn.setAttribute(
-            "aria-label",
-            "Open menu"
-        );
-
-        menuBtn.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-    }
-
-
-    function toggleMobileMenu() {
-
-        if (!navLinks || !menuBtn) {
-            return;
-        }
-
-        const isOpen =
-            navLinks.classList.toggle("active");
-
-        menuBtn.textContent =
-            isOpen ? "✕" : "☰";
-
-        menuBtn.setAttribute(
-            "aria-label",
-            isOpen ? "Close menu" : "Open menu"
-        );
-
-        menuBtn.setAttribute(
-            "aria-expanded",
-            isOpen ? "true" : "false"
-        );
-    }
-
-
-    if (menuBtn && navLinks) {
-
-        menuBtn.addEventListener(
-            "click",
-            toggleMobileMenu
-        );
-
-    }
-
-
-    /* =====================================================
-       NAVIGATION
-    ===================================================== */
-
-    const navItems =
-        document.querySelectorAll(".nav-links a");
-
-    navItems.forEach((link) => {
-
-        link.addEventListener("click", () => {
-
-            closeMobileMenu();
-
-        });
-
-    });
-
-
-    /* =====================================================
-       TOY FILTER SYSTEM
-    ===================================================== */
-
-    function filterToys(filter) {
-
-        let visibleToys = 0;
+        let visibleCount = 0;
 
         toyCards.forEach((card) => {
 
-            const category =
+            const cardCategory =
                 card.dataset.category;
 
             const shouldShow =
-                filter === "all" ||
-                category === filter;
+                category === "all" ||
+                cardCategory === category;
 
             if (shouldShow) {
 
-                card.style.display = "";
+                card.classList.remove("hidden");
 
-                visibleToys++;
-
-                /*
-                   Restart animation
-                */
-
-                card.classList.remove("filter-show");
-
-                /*
-                   Force browser reflow
-                   so animation can restart
-                */
-
-                void card.offsetWidth;
-
-                card.classList.add("filter-show");
+                visibleCount++;
 
             } else {
 
-                card.style.display = "none";
-
-                card.classList.remove("filter-show");
+                card.classList.add("hidden");
 
             }
 
         });
 
 
-        /* No results message */
-
         if (noResults) {
 
-            noResults.style.display =
-                visibleToys === 0
-                    ? "block"
-                    : "none";
+            noResults.hidden = visibleCount !== 0;
 
+            noResults.style.display =
+                visibleCount === 0 ? "block" : "none";
         }
 
     }
 
 
-    /* =====================================================
-       FILTER BUTTONS
-    ===================================================== */
+    /* Filter button click */
 
     filterButtons.forEach((button) => {
 
-        button.addEventListener(
-            "click",
-            () => {
+        button.addEventListener("click", () => {
 
-                filterButtons.forEach((btn) => {
+            const category =
+                button.dataset.filter;
 
-                    btn.classList.remove("active");
+            filterButtons.forEach((btn) => {
+                btn.classList.remove("active");
+            });
 
-                });
+            button.classList.add("active");
 
+            filterToys(category);
 
-                button.classList.add("active");
-
-
-                const selectedFilter =
-                    button.dataset.filter;
-
-
-                if (selectedFilter) {
-
-                    filterToys(
-                        selectedFilter
-                    );
-
-                }
-
-            }
-        );
+        });
 
     });
 
 
     /* =====================================================
        CATEGORY CARDS
-    ===================================================== */
+       ===================================================== */
 
-    categoryCards.forEach((categoryCard) => {
+    const categoryCards =
+        document.querySelectorAll(".category-card");
 
-        categoryCard.addEventListener(
-            "click",
-            () => {
+    categoryCards.forEach((card) => {
 
-                const selectedCategory =
-                    categoryCard.dataset.categoryLink;
+        card.addEventListener("click", () => {
+
+            const category =
+                card.dataset.categoryLink;
+
+            /* Update active filter button */
+
+            filterButtons.forEach((button) => {
+
+                button.classList.toggle(
+                    "active",
+                    button.dataset.filter === category
+                );
+
+            });
 
 
-                if (!selectedCategory) {
-                    return;
-                }
+            /* Apply filter */
+
+            filterToys(category);
 
 
-                const matchingButton =
-                    document.querySelector(
-                        `.filter-btn[data-filter="${selectedCategory}"]`
-                    );
+            /* Scroll to toys */
 
+            const toysSection =
+                document.getElementById("toys");
 
-                if (matchingButton) {
+            if (toysSection) {
 
-                    matchingButton.click();
-
-                    /*
-                       Scroll user back to toys section
-                    */
-
-                    const toysSection =
-                        document.getElementById("toys");
-
-                    if (toysSection) {
-
-                        toysSection.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start"
-                        });
-
-                    }
-
-                }
+                toysSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
 
             }
-        );
+
+        });
 
     });
 
 
     /* =====================================================
-       TOYS NAV LINK
-    ===================================================== */
-
-    const toysNavLink =
-        document.querySelector(
-            '.nav-links a[href="#toys"]'
-        );
-
-
-    if (toysNavLink) {
-
-        toysNavLink.addEventListener(
-            "click",
-            () => {
-
-                const allButton =
-                    document.querySelector(
-                        '.filter-btn[data-filter="all"]'
-                    );
-
-
-                if (allButton) {
-
-                    allButton.click();
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       AFFILIATE LINKS
-    ===================================================== */
+       AFFILIATE LINK TRACKING
+       ===================================================== */
 
     const affiliateLinks =
-        document.querySelectorAll(
-            "a.affiliate-link"
-        );
-
+        document.querySelectorAll(".affiliate-link");
 
     affiliateLinks.forEach((link) => {
 
-        const href =
-            link.getAttribute("href");
+        link.addEventListener("click", () => {
+
+            const store =
+                link.dataset.store || "Unknown Store";
+
+            const product =
+                link.dataset.product || "Unknown Product";
+
+            /*
+             * Simple console tracking.
+             * Later you can connect this with Google Analytics
+             * or another analytics platform.
+             */
+
+            console.log(
+                `Affiliate click: ${store} - ${product}`
+            );
+
+        });
+
+    });
 
 
-        /*
-           Only modify valid external URLs.
-        */
+    /* =====================================================
+       CLOSE MOBILE MENU WHEN CLICKING OUTSIDE
+       ===================================================== */
+
+    document.addEventListener("click", (event) => {
+
+        if (!navLinks || !menuBtn) {
+            return;
+        }
+
+        const clickedInsideMenu =
+            navLinks.contains(event.target);
+
+        const clickedMenuButton =
+            menuBtn.contains(event.target);
 
         if (
-            href &&
-            (
-                href.startsWith("https://") ||
-                href.startsWith("http://")
-            )
+            navLinks.classList.contains("open") &&
+            !clickedInsideMenu &&
+            !clickedMenuButton
         ) {
 
-            link.setAttribute(
-                "target",
-                "_blank"
+            navLinks.classList.remove("open");
+
+            menuBtn.setAttribute(
+                "aria-expanded",
+                "false"
             );
 
-            link.setAttribute(
-                "rel",
-                "nofollow sponsored noopener"
+            menuBtn.setAttribute(
+                "aria-label",
+                "Open navigation menu"
             );
 
+            menuBtn.textContent = "☰";
         }
 
-
-        /*
-           Track affiliate click
-        */
-
-        link.addEventListener(
-            "click",
-            () => {
-
-                const store =
-                    link.dataset.store ||
-                    "Unknown Store";
-
-                const product =
-                    link.dataset.product ||
-                    "Unknown Product";
+    });
 
 
-                console.log(
-                    "Affiliate Click",
-                    {
-                        store: store,
-                        product: product,
-                        url: href
-                    }
+    /* =====================================================
+       ESC KEY - CLOSE MOBILE MENU
+       ===================================================== */
+
+    document.addEventListener("keydown", (event) => {
+
+        if (event.key === "Escape" && navLinks) {
+
+            navLinks.classList.remove("open");
+
+            if (menuBtn) {
+
+                menuBtn.setAttribute(
+                    "aria-expanded",
+                    "false"
                 );
 
+                menuBtn.setAttribute(
+                    "aria-label",
+                    "Open navigation menu"
+                );
 
-                /*
-                   Optional Google Analytics support.
-                   Works only if gtag exists.
-                */
-
-                if (
-                    typeof window.gtag === "function"
-                ) {
-
-                    window.gtag(
-                        "event",
-                        "affiliate_click",
-                        {
-                            store: store,
-                            product: product
-                        }
-                    );
-
-                }
-
+                menuBtn.textContent = "☰";
             }
-        );
+
+        }
 
     });
 
 
     /* =====================================================
-       PREVENT EMPTY PRODUCT LINKS
-    ===================================================== */
-
-    productButtons.forEach((button) => {
-
-        button.addEventListener(
-            "click",
-            (event) => {
-
-                const href =
-                    button.getAttribute("href");
-
-
-                if (
-                    !href ||
-                    href === "#"
-                ) {
-
-                    event.preventDefault();
-
-                    console.warn(
-                        "Affiliate URL is missing:",
-                        button
-                    );
-
-                }
-
-            }
-        );
-
-    });
-
-
-    /* =====================================================
-       SCROLL REVEAL
-    ===================================================== */
-
-    const revealElements =
-        document.querySelectorAll(
-            ".toy-card, .category-card, .why-card, .affiliate-notice, .store-card"
-        );
-
-
-    if (
-        "IntersectionObserver" in window &&
-        revealElements.length > 0
-    ) {
-
-        const observer =
-            new IntersectionObserver(
-                (entries, observerInstance) => {
-
-                    entries.forEach((entry) => {
-
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-                            entry.target.classList.add(
-                                "revealed"
-                            );
-
-                            observerInstance.unobserve(
-                                entry.target
-                            );
-
-                        }
-
-                    });
-
-                },
-                {
-                    threshold: 0.08
-                }
-            );
-
-
-        revealElements.forEach((element) => {
-
-            element.classList.add(
-                "reveal-element"
-            );
-
-            observer.observe(element);
-
-        });
-
-    } else {
-
-        /*
-           Fallback for older browsers
-        */
-
-        revealElements.forEach((element) => {
-
-            element.classList.add(
-                "revealed"
-            );
-
-        });
-
-    }
-
-
-    /* =====================================================
-       ESC KEY
-    ===================================================== */
-
-    document.addEventListener(
-        "keydown",
-        (event) => {
-
-            if (event.key === "Escape") {
-
-                closeMobileMenu();
-
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       CLOSE MENU WHEN CLICKING OUTSIDE
-    ===================================================== */
-
-    document.addEventListener(
-        "click",
-        (event) => {
-
-            if (
-                !navLinks ||
-                !menuBtn ||
-                !navLinks.classList.contains("active")
-            ) {
-                return;
-            }
-
-
-            const clickedInsideMenu =
-                navLinks.contains(event.target);
-
-            const clickedMenuButton =
-                menuBtn.contains(event.target);
-
-
-            if (
-                !clickedInsideMenu &&
-                !clickedMenuButton
-            ) {
-
-                closeMobileMenu();
-
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       CURRENT YEAR
-    ===================================================== */
-
-    if (copyright) {
-
-        copyright.textContent =
-            `© ${new Date().getFullYear()} KiddoPlay. All rights reserved.`;
-
-    }
-
-
-    /* =====================================================
-       INITIAL FILTER
-    ===================================================== */
+       INITIAL STATE
+       ===================================================== */
 
     filterToys("all");
-
-
-    /* =====================================================
-       PAGE LOADED
-    ===================================================== */
-
-    console.log(
-        "KiddoPlay loaded successfully."
-    );
-
-    console.log(
-        "Affiliate-ready product system active."
-    );
 
 });
 ```
